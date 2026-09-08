@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM", "DOM.Iterable", "DOM.AsyncIterable"],
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "checkJs": false,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@arkane/core": ["../packages/core/src/index.ts"],
+      "@arkane/react": ["../packages/react/src/index.ts"],
+      "@arkane/vue": ["../packages/vue/src/index.ts"],
+      "@arkane/vite": ["../packages/vite/src/index.ts"],
+      "@arkane/cli": ["../packages/cli/src/index.ts"],
+      "#fixtures/*": ["../fixtures/*"]
+    }
+  },
+  "exclude": [
+    ".*",
+    "dist/**",
+    "build/**",
+    "node_modules/**"
+  ]
+}
