@@ -13,6 +13,7 @@ export default defineConfig({
     isolatedDeclarations: true
   },
   clean: true,
+  copy: ['index.html'],
   bundleless: false,
   platform: 'neutral',
   deps: {
