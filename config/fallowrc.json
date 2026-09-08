@@ -1,5 +1,14 @@
 {
   "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
   "entry": ["packages/**/src/index.ts", "packages/cli/src/bin.ts", "fixtures/**"],
-  "ignorePatterns": ["config/**", "scripts/**", "**/*.test.*"]
+  "ignorePatterns": ["config/**", "scripts/**", "**/*.test.*", "tsdown.config.ts"],
+  "ignoreDependencies": [
+    "@yuku-codegen/binding-linux-x64-gnu",
+    "@cliffy/command",
+    "@cliffy/table",
+    "@cliffy/ansi",
+    "@sveltejs/vite-plugin-svelte",
+    "tsdown",
+    "vite-plus"
+  ]
 }

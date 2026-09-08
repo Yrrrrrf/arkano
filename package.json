@@ -37,5 +37,8 @@
     "react-dom": { "optional": true },
     "vue": { "optional": true },
     "vite": { "optional": true }
+  },
+  "dependencies": {
+    "@yuku-codegen/binding-linux-x64-gnu": "^0.9.4"
   }
 }

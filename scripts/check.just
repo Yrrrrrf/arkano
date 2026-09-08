@@ -23,7 +23,7 @@ lint-check:
 [doc('Audit code namespaces for unused exports and dead code (Fallow)')]
 [group('check')]
 audit:
-    ^deno run -A npm:fallow -c config/fallowrc.json
+    ^deno run -A npm:fallow dead-code -c config/fallowrc.json
 
 [doc('Check code health score via Fallow')]
 [group('check')]

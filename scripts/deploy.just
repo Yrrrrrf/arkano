@@ -2,25 +2,34 @@
 
 [doc('CI quality gate convergence: format-check + lint-check + audit + types + test')]
 [group('ci')]
+[positional-arguments]
 [script]
-ci:
-    _banner "RUNNING ARKANE CI CONVERGENCE GATE"
-    print "▶ [Phase 1/5] Biome Formatting Verification..."
+ci *flags:
+    just _banner "RUNNING ARKANE CI CONVERGENCE GATE"
+    print "▶ [Phase 1/6] Biome Formatting Verification..."
     just fmt-check
-    print "▶ [Phase 2/5] Biome Lint Verification..."
+    print "▶ [Phase 2/6] Biome Lint Verification..."
     just lint-check
-    print "▶ [Phase 3/5] Fallow Code Audit..."
+    print "▶ [Phase 3/6] Fallow Code Audit..."
     just audit
-    print "▶ [Phase 4/5] Multi-Engine Type Matrix..."
+    print "▶ [Phase 4/6] Multi-Engine Type Matrix..."
     just types
-    print "▶ [Phase 5/5] Vitest Test Suite..."
+    print "▶ [Phase 5/6] Vitest Test Suite..."
     just test
+    print "▶ [Phase 6/6] Packaging Distribution..."
+    just build
     print "\n🎉 ALL CI GATES GREEN — CONVERGENCE PASSED."
 
 [doc('Package Arkane distribution via tsdown')]
 [group('deploy')]
-build:
-    ^deno run -A npm:tsdown --config ./tsdown.config.ts
+[positional-arguments]
+[script]
+build *flags:
+    if (which npx | is-not-empty) {
+        ^npx tsdown --config ./tsdown.config.ts
+    } else {
+        ^deno run -A npm:tsdown --config ./tsdown.config.ts
+    }
 
 [doc('Preview build distribution')]
 [group('deploy')]
@@ -31,5 +40,5 @@ preview: build
 [group('deploy')]
 [confirm("Ship release to production?")]
 publish: _clean-tree ci build
-    _banner "shipping {{PROJECT}} {{VERSION}}"
+    just _banner "shipping {{PROJECT}} {{VERSION}}"
     @print "Published {{PROJECT}} {{VERSION}} successfully"

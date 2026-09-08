@@ -5,7 +5,8 @@ export default defineConfig({
     globals: true,
     projects: [
       './packages/*/vitest.config.ts',
-      './packages/*/vite.config.ts'
+      './packages/*/vite.config.ts',
+      './fixtures/vitest.config.ts'
     ],
     exclude: [
       '**/node_modules/**',
