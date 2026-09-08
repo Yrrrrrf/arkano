@@ -4,7 +4,7 @@
 [group('test')]
 [script]
 test filter='':
-    let args = if ("{{filter}}" in ["core", "react", "vue", "vite", "cli"]) {
+    let args = if ("{{filter}}" in ["core", "react", "vue", "vite", "cli", "showcase"]) {
         ["--project", "{{filter}}"]
     } else if ("{{filter}}" | is-not-empty) {
         ["{{filter}}"]

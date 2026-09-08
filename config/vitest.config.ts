@@ -4,10 +4,14 @@ export default defineConfig({
   test: {
     globals: true,
     projects: [
-      './packages/*/vitest.config.ts',
-      './packages/*/vite.config.ts',
+      './src/*/vitest.config.ts',
       './fixtures/vitest.config.ts'
     ],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html'],
+      include: ['src/**/src/**/*.ts', 'src/**/src/**/*.svelte.ts']
+    },
     exclude: [
       '**/node_modules/**',
       '**/.git/**',

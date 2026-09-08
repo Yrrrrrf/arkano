@@ -3,19 +3,26 @@
   "version": "1.0.0",
   "description": "Universal Svelte 5 Runes Conduit for React 19 & Vue 3.5",
   "license": "MIT",
+  "exports": {
+    ".": "./src/core/src/index.ts",
+    "./react": "./src/react/src/index.ts",
+    "./vue": "./src/vue/src/index.ts",
+    "./vite": "./src/vite/src/index.ts",
+    "./cli": "./src/cli/src/bin.ts"
+  },
   "nodeModulesDir": "auto",
   "compilerOptions": {
     "lib": ["deno.ns", "dom", "esnext"]
   },
   "workspace": [
-    "./packages/*"
+    "./src/*"
   ],
   "imports": {
-    "@arkane/core": "./packages/core/src/index.ts",
-    "@arkane/react": "./packages/react/src/index.ts",
-    "@arkane/vue": "./packages/vue/src/index.ts",
-    "@arkane/vite": "./packages/vite/src/index.ts",
-    "@arkane/cli": "./packages/cli/src/index.ts",
+    "@arkane/core": "./src/core/src/index.ts",
+    "@arkane/react": "./src/react/src/index.ts",
+    "@arkane/vue": "./src/vue/src/index.ts",
+    "@arkane/vite": "./src/vite/src/index.ts",
+    "@arkane/cli": "./src/cli/src/index.ts",
     "svelte": "npm:svelte@^5.0.0",
     "@sveltejs/vite-plugin-svelte": "npm:@sveltejs/vite-plugin-svelte@latest",
     "react": "npm:react@^19.0.0",
@@ -35,6 +42,7 @@
     "vite-plus": "npm:vite-plus@latest",
     "tsdown": "npm:tsdown@latest",
     "jsdom": "npm:jsdom@latest",
+    "@vitest/coverage-v8": "npm:@vitest/coverage-v8@^4.0.0",
     "@std/fs": "jsr:@std/fs@^1.0.14"
   }
 }

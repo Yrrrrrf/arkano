@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { arkane as reactArkane } from '../packages/react/src/index.ts';
+import { arkane as reactArkane } from '../src/react/src/index.ts';
 import { mount as mountVue } from '@vue/test-utils';
-import { arkane as vueArkane } from '../packages/vue/src/index.ts';
+import { arkane as vueArkane } from '../src/vue/src/index.ts';
 // @ts-expect-error - Svelte fixture import
 import Counter from './components/Counter.svelte';
 // @ts-expect-error - Svelte fixture import

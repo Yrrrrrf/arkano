@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arkane — Universal Svelte 5 Runes Conduit</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-base-300 text-base-content font-sans p-8">
+  <main class="max-w-4xl mx-auto space-y-8">
+    <header class="text-center space-y-4">
+      <div class="badge badge-primary badge-outline text-sm font-mono py-3 px-4">@arkane/monorepo</div>
+      <h1 class="text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+        Arkane Engine
+      </h1>
+      <p class="text-xl text-base-content/70">
+        Universal Svelte 5 Runes Conduit for React 19 & Vue 3.5
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="card bg-base-100 shadow-xl border border-base-200">
+        <div class="card-body">
+          <h2 class="card-title text-primary">@arkane/core</h2>
+          <p class="text-sm text-base-content/80">In-place Svelte 5 <code>$state</code> reactive proxy, synthetic event normalizer, and ArkType schema validation.</p>
+        </div>
+      </div>
+      <div class="card bg-base-100 shadow-xl border border-base-200">
+        <div class="card-body">
+          <h2 class="card-title text-secondary">@arkane/react</h2>
+          <p class="text-sm text-base-content/80">React 19 <code>&lt;ArkaneHost /&gt;</code> and <code>toReact()</code> HOC with <code>display: contents</code> layout transparency.</p>
+        </div>
+      </div>
+      <div class="card bg-base-100 shadow-xl border border-base-200">
+        <div class="card-body">
+          <h2 class="card-title text-accent">@arkane/vue</h2>
+          <p class="text-sm text-base-content/80">Vue 3.5 <code>defineComponent</code> host with deep reactivity synchronization and ref forwarding.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card bg-base-100 shadow-xl border border-base-200">
+      <div class="card-body space-y-4">
+        <h3 class="text-xl font-bold">Quick Verification Commands</h3>
+        <div class="mockup-code bg-neutral text-neutral-content">
+          <pre data-prefix="$"><code>just prepare   # Clean & install dependencies</code></pre>
+          <pre data-prefix="$"><code>just ci -vp    # Run complete 6-phase CI convergence gate</code></pre>
+          <pre data-prefix="$"><code>just coverage  # Run Vitest with v8 coverage report</code></pre>
+          <pre data-prefix="$"><code>just build     # Dual ESM/CJS build via tsdown</code></pre>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

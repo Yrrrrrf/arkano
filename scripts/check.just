@@ -33,7 +33,7 @@ health:
 [doc('Type-check Deno & core TypeScript modules')]
 [group('check')]
 types-core:
-    ^deno check packages/core/src/index.ts packages/vite/src/index.ts packages/cli/src/bin.ts
+    ^deno check src/core/src/index.ts src/vite/src/index.ts src/cli/src/bin.ts
 
 [doc('Type-check Svelte 5 Runes mode')]
 [group('check')]

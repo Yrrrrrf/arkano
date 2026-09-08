@@ -4,6 +4,9 @@
   "description": "Universal Svelte 5 Runes Conduit for React 19 & Vue 3.5",
   "type": "module",
   "license": "MIT",
+  "workspaces": [
+    "src/*"
+  ],
   "exports": {
     ".": {
       "types": "./dist/core/index.d.ts",
@@ -40,5 +43,8 @@
   },
   "dependencies": {
     "@yuku-codegen/binding-linux-x64-gnu": "^0.9.4"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^4.1.11"
   }
 }

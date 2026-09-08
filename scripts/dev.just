@@ -10,6 +10,7 @@ prune:
         ".vite"
         "dist"
         "build"
+        "coverage"
         ".justcache"
     ]
     for target in $targets {

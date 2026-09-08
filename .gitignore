@@ -15,6 +15,7 @@ translations
 temp
 build
 dist
+coverage
 # *.pdf
 
 # ide configuration files 
