@@ -5,36 +5,43 @@ interface Props {
 	onchange?: (count: number) => void;
 }
 
-interface Actions {
-	increment: () => void;
-	reset: () => void;
-}
-
 let { initial = 0, count = $bindable(initial), onchange }: Props = $props();
 
-const actions: Actions = {
-	increment: () => {
-		count += 1;
-		onchange?.(count);
-	},
-	reset: () => {
-		count = 0;
-		onchange?.(count);
-	},
-};
+let time = $state(new Date());
+let timeString = $derived(time.toLocaleTimeString());
+
+$effect(() => {
+	const timer = setInterval(() => {
+		time = new Date();
+	}, 1000);
+	return () => clearInterval(timer);
+});
 </script>
 
 <div class="card bg-base-200 shadow-md p-6 flex flex-col items-center gap-4">
+	<div class="badge badge-neutral font-mono text-xs tracking-wider">
+		{timeString}
+	</div>
 	<span class="text-4xl font-mono font-bold">{count}</span>
 	<div class="flex gap-2">
 		<button
 			type="button"
 			class="btn btn-primary btn-sm"
-			onclick={actions.increment}
+			onclick={() => {
+				count += 1;
+				onchange?.(count);
+			}}
 		>
 			Increment
 		</button>
-		<button type="button" class="btn btn-ghost btn-sm" onclick={actions.reset}>
+		<button
+			type="button"
+			class="btn btn-ghost btn-sm"
+			onclick={() => {
+				count = 0;
+				onchange?.(count);
+			}}
+		>
 			Reset
 		</button>
 	</div>

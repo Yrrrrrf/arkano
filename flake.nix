@@ -25,7 +25,7 @@
           pkg-config
           just
           nushell
-          protobuf
+          deno
         ];
         # libraries the build links against
         buildInputs = with pkgs; [
