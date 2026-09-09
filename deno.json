@@ -11,13 +11,9 @@
 		"./cli": "./src/cli/src/bin.ts"
 	},
 	"nodeModulesDir": "auto",
-	"compilerOptions": {
-		"lib": ["deno.ns", "dom", "esnext"]
-	},
 	"workspace": ["./src/*", "./apps/*"],
 	"overrides": {
 		"typescript": "npm:typescript@~6.0.3",
-		"vite": "npm:vite@^8.0.0"
 	},
 	"imports": {
 		"@arkane/core": "./src/core/src/index.ts",
