@@ -133,6 +133,49 @@ export function ensureNodeCompat(): void {
 						}
 					}
 				}
+
+				// Ensure @typescript/native-preview binary compatibility for svelte-check-native
+				const tsScope = join(nm, "@typescript");
+				if (existsSync(tsScope)) {
+					// 1. Ensure tsgo.js symlink exists alongside tsgo in bin
+					const tsgoBin = join(tsScope, "native-preview", "bin", "tsgo");
+					const tsgoJs = join(tsScope, "native-preview", "bin", "tsgo.js");
+					if (existsSync(tsgoBin) && !existsSync(tsgoJs)) {
+						try {
+							Deno.symlinkSync("tsgo", tsgoJs);
+						} catch {
+							// Ignore
+						}
+					}
+
+					// 2. Ensure platform-specific @typescript/native-preview-<platform>-<arch> is linked
+					for (const entry of Deno.readDirSync(denoNm)) {
+						if (entry.name.startsWith("@typescript+native-preview-")) {
+							const atIdx = entry.name.indexOf("@", 1);
+							const pkgRaw =
+								atIdx !== -1 ? entry.name.slice(0, atIdx) : entry.name;
+							const subName = pkgRaw.replace("@typescript+", "");
+							const targetSymlink = join(tsScope, subName);
+							if (!existsSync(targetSymlink)) {
+								const target = join(
+									denoNm,
+									entry.name,
+									"node_modules",
+									"@typescript",
+									subName,
+								);
+								if (existsSync(target)) {
+									const rel = relative(tsScope, target);
+									try {
+										Deno.symlinkSync(rel, targetSymlink);
+									} catch {
+										// Ignore
+									}
+								}
+							}
+						}
+					}
+				}
 			} catch {
 				// Ignored
 			}

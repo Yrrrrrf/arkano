@@ -26,6 +26,8 @@ prune:
 prepare: prune
     ^deno install
     ^deno install --entrypoint npm:vue-tsc npm:typescript@6
+    ^deno install --entrypoint npm:svelte-check-native npm:@typescript/native-preview npm:typescript@6
+    {{ CLI }} compat
 
 [doc('Run an app on the dev server (pass -A to run all apps concurrently)')]
 [group('dev')]

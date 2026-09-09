@@ -1,53 +1,43 @@
 {
-  "name": "arkane",
-  "version": "1.0.0",
-  "description": "Universal Svelte 5 Runes Conduit for React 19 & Vue 3.5",
-  "license": "MIT",
-  "exports": {
-    ".": "./src/core/src/index.ts",
-    "./react": "./src/react/src/index.ts",
-    "./vue": "./src/vue/src/index.ts",
-    "./vite": "./src/vite/src/index.ts",
-    "./cli": "./src/cli/src/bin.ts"
-  },
-  "nodeModulesDir": "auto",
-  "compilerOptions": {
-    "lib": ["deno.ns", "dom", "esnext"]
-  },
-  "workspace": [
-    "./src/*",
-    "./apps/*"
-  ],
-  "tasks": {
-    "test": "deno run -A npm:vitest run --config ./config/vitest.config.ts",
-    "test:coverage": "deno run -A npm:vitest run --coverage --config ./config/vitest.config.ts",
-    "test:watch": "deno run -A npm:vitest --config ./config/vitest.config.ts",
-    "check": "deno check src/core/src/index.ts src/vite/src/index.ts src/cli/src/bin.ts",
-    "dev": "deno run -A ./scripts/cli/main.ts dev",
-    "build": "deno run -A ./scripts/cli/main.ts build",
-    "preview": "deno run -A ./scripts/cli/main.ts preview"
-  },
-  "overrides": {
-    "typescript": "npm:typescript@~6.0.3",
-    "vite": "npm:vite@^8.0.0"
-  },
-  "imports": {
-    "@arkane/core": "./src/core/src/index.ts",
-    "@arkane/react": "./src/react/src/index.ts",
-    "@arkane/vue": "./src/vue/src/index.ts",
-    "@arkane/vite": "./src/vite/src/index.ts",
-    "@arkane/cli": "./src/cli/src/index.ts",
-    "@sdk/ui": "./fixtures/components/mod.ts",
-    "#fixtures/*": "./fixtures/*",
-    "vite-plus": "npm:vite-plus@latest",
-    "tailwindcss": "npm:tailwindcss",
-    "@tailwindcss/vite": "npm:@tailwindcss/vite",
-    "@tailwindcss/forms": "npm:@tailwindcss/forms",
-    "@tailwindcss/typography": "npm:@tailwindcss/typography",
-    "daisyui": "npm:daisyui",
-    "esm-env": "npm:esm-env",
-    "tsdown": "npm:tsdown@latest",
-    "jsdom": "npm:jsdom@latest",
-    "@vitest/coverage-v8": "npm:@vitest/coverage-v8@^4.0.0"
-  }
+	"name": "arkane",
+	"version": "1.0.0",
+	"description": "Universal Svelte 5 Runes Conduit for React 19 & Vue 3.5",
+	"license": "MIT",
+	"exports": {
+		".": "./src/core/src/index.ts",
+		"./react": "./src/react/src/index.ts",
+		"./vue": "./src/vue/src/index.ts",
+		"./vite": "./src/vite/src/index.ts",
+		"./cli": "./src/cli/src/bin.ts"
+	},
+	"nodeModulesDir": "auto",
+	"compilerOptions": {
+		"lib": ["deno.ns", "dom", "esnext"]
+	},
+	"workspace": ["./src/*", "./apps/*"],
+	"overrides": {
+		"typescript": "npm:typescript@~6.0.3",
+		"vite": "npm:vite@^8.0.0"
+	},
+	"imports": {
+		"@arkane/core": "./src/core/src/index.ts",
+		"@arkane/react": "./src/react/src/index.ts",
+		"@arkane/vue": "./src/vue/src/index.ts",
+		"@arkane/vite": "./src/vite/src/index.ts",
+		"@arkane/cli": "./src/cli/src/index.ts",
+		"@sdk/ui": "./fixtures/components/mod.ts",
+		"#fixtures/*": "./fixtures/*",
+		"vite-plus": "npm:vite-plus@latest",
+		"tailwindcss": "npm:tailwindcss",
+		"@tailwindcss/vite": "npm:@tailwindcss/vite",
+		"@tailwindcss/forms": "npm:@tailwindcss/forms",
+		"@tailwindcss/typography": "npm:@tailwindcss/typography",
+		"daisyui": "npm:daisyui",
+		"esm-env": "npm:esm-env",
+		"tsdown": "npm:tsdown@latest",
+		"jsdom": "npm:jsdom@latest",
+		"@vitest/coverage-v8": "npm:@vitest/coverage-v8@^4.0.0",
+		"svelte-check-native": "npm:svelte-check-native@^1.5.2",
+		"@typescript/native-preview": "npm:@typescript/native-preview@^7.0.0-dev"
+	}
 }

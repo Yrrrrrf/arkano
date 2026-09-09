@@ -38,7 +38,9 @@ types-core:
 [doc('Type-check Svelte 5 Runes mode')]
 [group('check')]
 types-svelte:
-    ^deno run -A npm:svelte-check --tsconfig ./config/tsconfig.json --threshold error
+    ^deno install --entrypoint npm:svelte-check-native npm:@typescript/native-preview npm:typescript@6
+    {{ CLI }} compat
+    ^deno run -A npm:svelte-check-native --tsconfig ./config/tsconfig.json --threshold error
 
 [doc('Type-check React 19 adapters and JSX types (tsc)')]
 [group('check')]

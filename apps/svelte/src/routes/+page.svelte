@@ -1,6 +1,5 @@
 <script lang="ts">
-import { Counter, Icon } from "#lib";
-import faviconUrl from "#lib/assets/img/svelte.svg";
+import { Counter, Icon, faviconUrl } from "../lib/mod.ts";
 import pkg from "../../deno.json" with { type: "json" };
 </script>
 

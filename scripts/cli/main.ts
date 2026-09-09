@@ -72,6 +72,11 @@ const cli = new Command()
 			},
 			targetApp,
 		);
+	})
+	// ── COMPAT ──────────────────────────────────────────────────────────
+	.command("compat", "Ensure node_modules symlinks and compatibility layer")
+	.action(() => {
+		ensureNodeCompat();
 	});
 
 if (import.meta.main) {
