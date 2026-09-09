@@ -27,7 +27,12 @@ prepare: prune
     ^deno install
     ^deno install --entrypoint npm:vue-tsc npm:typescript@6
 
-[doc('Start playground dev server')]
+[doc('Run an app on the dev server (pass -A to run all apps concurrently)')]
 [group('dev')]
-dev:
-    ^deno run -A npm:vite
+[positional-arguments]
+dev *flags:
+    {{ CLI }} dev {{ flags }}
+
+alias run := dev
+
+
