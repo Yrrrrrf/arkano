@@ -1,8 +1,9 @@
 {
 	"name": "arkane",
-	"version": "1.0.0",
+	"version": "0.0.1",
 	"description": "Universal Svelte 5 Runes Conduit for React 19 & Vue 3.5",
 	"license": "MIT",
+	"authors": ["Fernando Bryan Reza Campos <fer.rezac@outlook.com"],
 	"exports": {
 		".": "./src/core/src/index.ts",
 		"./react": "./src/react/src/index.ts",
