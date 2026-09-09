@@ -62,10 +62,10 @@ export function defineGWA(options: GwaConfig = {}) {
 					replacement: `${FIXTURES_ROOT}/components/$1`,
 				},
 				{
-					find: /^@arkane\/([^/]+)$/,
+					find: /^@arkano\/([^/]+)$/,
 					replacement: `${SRC_ROOT}/$1/src/index.ts`,
 				},
-				{ find: /^@arkane\/(.*)/, replacement: `${SRC_ROOT}/$1` },
+				{ find: /^@arkano\/(.*)/, replacement: `${SRC_ROOT}/$1` },
 				{ find: /^#fixtures\/(.*)/, replacement: `${FIXTURES_ROOT}/$1` },
 				{ find: /^#lib\/(.*)/, replacement: "/src/lib/$1" },
 				{ find: /^#lib$/, replacement: "/src/lib/mod.ts" },
@@ -79,7 +79,7 @@ export function defineGWA(options: GwaConfig = {}) {
 	});
 }
 
-export { arkane } from "../src/vite/src/index.ts";
-export const defineArkaneApp = defineGWA;
+export { arkano } from "../src/vite/src/index.ts";
+export const defineArkanoApp = defineGWA;
 export default defineGWA();
 export type { PluginOption };

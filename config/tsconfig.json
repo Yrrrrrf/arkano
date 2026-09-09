@@ -15,12 +15,12 @@
 		"resolveJsonModule": true,
 		"types": ["vite/client"],
 		"paths": {
-			"@arkane/core": ["../src/core/src/index.ts"],
-			"@arkane/react": ["../src/react/src/index.ts"],
-			"@arkane/vue": ["../src/vue/src/index.ts"],
-			"@arkane/vite": ["../src/vite/src/index.ts"],
-			"@arkane/vite/client": ["../src/vite/client.d.ts"],
-			"@arkane/cli": ["../src/cli/src/index.ts"],
+			"@arkano/core": ["../src/core/src/index.ts"],
+			"@arkano/react": ["../src/react/src/index.ts"],
+			"@arkano/vue": ["../src/vue/src/index.ts"],
+			"@arkano/vite": ["../src/vite/src/index.ts"],
+			"@arkano/vite/client": ["../src/vite/client.d.ts"],
+			"@arkano/cli": ["../src/cli/src/index.ts"],
 			"@sdk/ui": ["../fixtures/components/mod.ts"],
 			"@sdk/ui/*": ["../fixtures/components/*"],
 			"#fixtures/*": ["../fixtures/*"]

@@ -1,4 +1,4 @@
-# justfile — Arkane Root Harness
+# justfile — Arkano Root Harness
 # Universal Svelte 5 Runes Conduit for React 19 & Vue 3.5
 
 set shell := ["nu", "-c"]

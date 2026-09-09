@@ -1,16 +1,16 @@
 import { render, screen } from "@testing-library/react";
 import { mount as mountVue } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
-import { arkane as reactArkane } from "../src/react/src/index.ts";
-import { arkane as vueArkane } from "../src/vue/src/index.ts";
+import { arkano as reactArkano } from "../src/react/src/index.ts";
+import { arkano as vueArkano } from "../src/vue/src/index.ts";
 // @ts-expect-error - Svelte fixture import
 import Counter from "./components/Counter.svelte";
 // @ts-expect-error - Svelte fixture import
 import Icon from "./components/Icon.svelte";
 
-describe("Arkane Universal Host End-to-End Showcase", () => {
+describe("Arkano Universal Host End-to-End Showcase", () => {
 	it("mounts Svelte Counter in React 19 inside DaisyUI .join container with display: contents", () => {
-		const ReactCounter = reactArkane(Counter);
+		const ReactCounter = reactArkano(Counter);
 
 		const { container } = render(
 			<div data-theme="synthwave" className="p-4">
@@ -36,7 +36,7 @@ describe("Arkane Universal Host End-to-End Showcase", () => {
 	});
 
 	it("mounts Svelte Icon in Vue 3.5 with dynamic route derived paths", () => {
-		const VueIcon = vueArkane(Icon);
+		const VueIcon = vueArkano(Icon);
 
 		const wrapper = mountVue(VueIcon, {
 			attrs: {

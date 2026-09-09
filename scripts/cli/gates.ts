@@ -281,7 +281,7 @@ export interface PagesGateOptions extends GateOptions {
 export async function runPagesGate(
 	options: PagesGateOptions = {},
 ): Promise<void> {
-	const repo = options.repo ?? "arkane";
+	const repo = options.repo ?? "arkano";
 	const shouldPush = options.push !== false;
 	const targets = getAppTargets();
 

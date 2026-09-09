@@ -11,8 +11,8 @@ const sharedAliases = [
 	{ find: /^@std\/assert$/, replacement: "node:assert" },
 	{ find: /^@sdk\/ui$/, replacement: `${FIXTURES_ROOT}/components/mod.ts` },
 	{ find: /^@sdk\/ui\/(.*)/, replacement: `${FIXTURES_ROOT}/components/$1` },
-	{ find: /^@arkane\/([^/]+)$/, replacement: `${SRC_ROOT}/$1/src/index.ts` },
-	{ find: /^@arkane\/(.*)/, replacement: `${SRC_ROOT}/$1` },
+	{ find: /^@arkano\/([^/]+)$/, replacement: `${SRC_ROOT}/$1/src/index.ts` },
+	{ find: /^@arkano\/(.*)/, replacement: `${SRC_ROOT}/$1` },
 	{ find: /^#fixtures\/(.*)/, replacement: `${FIXTURES_ROOT}/$1` },
 ];
 

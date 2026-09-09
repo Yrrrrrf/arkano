@@ -1,10 +1,10 @@
-import type { BaseAdapterOptions, SupportedHostTag } from "@arkane/core";
+import type { BaseAdapterOptions, SupportedHostTag } from "@arkano/core";
 import type React from "react";
 import type { Component, ComponentProps } from "svelte";
 
 export type { SupportedHostTag };
 
-export type ArkaneHostProps<
+export type ArkanoHostProps<
 	C extends Component<Record<string, unknown>, Record<string, unknown>>,
 > = {
 	/** The Svelte 5 component to mount */
@@ -19,4 +19,4 @@ export type ArkaneHostProps<
 	? ComponentProps<C>
 	: Record<string, unknown>);
 
-export interface ArkaneAdapterOptions extends BaseAdapterOptions {}
+export interface ArkanoAdapterOptions extends BaseAdapterOptions {}

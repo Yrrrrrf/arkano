@@ -34,9 +34,9 @@ export default defineConfig({
 			"@std/path",
 			"@std/streams",
 			"@std/assert",
-			"@arkane/core",
-			"@arkane/react",
-			"@arkane/vue",
+			"@arkano/core",
+			"@arkano/react",
+			"@arkano/vue",
 		],
 	},
 });

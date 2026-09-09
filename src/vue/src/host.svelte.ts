@@ -1,4 +1,4 @@
-import { type MountedConduit, mountSvelteConduit } from "@arkane/core";
+import { type MountedConduit, mountSvelteConduit } from "@arkano/core";
 import type { mount } from "svelte";
 import {
 	defineComponent,
@@ -12,11 +12,11 @@ import {
 import type { SupportedVueHostTag } from "./types.ts";
 
 /**
- * Arkane Host for Vue 3.5.
+ * Arkano Host for Vue 3.5.
  * Mounts a Svelte 5 component inside a layout-invisible container with deep attribute synchronization.
  */
-export const Arkane = defineComponent({
-	name: "ArkaneVueHost",
+export const Arkano = defineComponent({
+	name: "ArkanoVueHost",
 	props: {
 		this: {
 			type: [Object, Function] as PropType<Parameters<typeof mount>[0]>,
@@ -90,4 +90,4 @@ export const Arkane = defineComponent({
 	},
 });
 
-export { Arkane as Svelte };
+export { Arkano as Svelte };

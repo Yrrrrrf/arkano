@@ -1,4 +1,4 @@
-// portal.ts — Hub dashboard and GitHub Pages SPA router fallback generator for Arkane
+// portal.ts — Hub dashboard and GitHub Pages SPA router fallback generator for Arkano
 export interface HubOptions {
 	readonly repoName: string;
 	readonly commitSha?: string;
@@ -17,8 +17,8 @@ export function generateHubHtml(options: HubOptions): string {
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Arkane · Universal Svelte 5 Runes Conduit</title>
-  <meta name="description" content="Portal central for Arkane: Universal Svelte 5 Runes Conduit for React 19 and Vue 3.5." />
+  <title>Arkano · Universal Svelte 5 Runes Conduit</title>
+  <meta name="description" content="Portal central for Arkano: Universal Svelte 5 Runes Conduit for React 19 and Vue 3.5." />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
   <style>
     :root {
@@ -257,7 +257,7 @@ export function generateHubHtml(options: HubOptions): string {
         <div class="pulse-dot"></div>
         <span>3 SHOWCASE APPS LIVE</span>
       </div>
-      <h1>ARKANE PLATFORM</h1>
+      <h1>ARKANO PLATFORM</h1>
       <p class="subtitle">Universal Svelte 5 Runes Conduit for React 19 &amp; Vue 3.5 with zero runtime overhead and sub-millisecond HMR.</p>
     </header>
 
@@ -327,7 +327,7 @@ export function generate404Html(repoName: string): string {
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Arkane · Redirecting...</title>
+  <title>Arkano · Redirecting...</title>
   <script>
     // GitHub Pages SPA router redirect handler
     (function() {
@@ -346,7 +346,7 @@ export function generate404Html(repoName: string): string {
   </script>
 </head>
 <body style="background:#070a12;color:#94a3b8;font-family:system-ui;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;">
-  <p>Redirecting to Arkane Platform...</p>
+  <p>Redirecting to Arkano Platform...</p>
 </body>
 </html>
 `;

@@ -1,7 +1,7 @@
 {
-	"name": "@arkane/vue",
+	"name": "@arkano/vue",
 	"version": "1.0.0",
-	"description": "Vue 3.5 host, HOC, and directives for Arkane",
+	"description": "Vue 3.5 host, HOC, and directives for Arkano",
 	"license": "MIT",
 	"exports": "./src/index.ts",
 	"imports": {
@@ -9,6 +9,6 @@
 		"@vitejs/plugin-vue": "npm:@vitejs/plugin-vue@latest",
 		"@vue/test-utils": "npm:@vue/test-utils@latest",
 		"svelte": "npm:svelte@^5.0.0",
-		"@arkane/core": "workspace:@arkane/core"
+		"@arkano/core": "workspace:@arkano/core"
 	}
 }

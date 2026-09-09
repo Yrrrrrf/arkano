@@ -3,7 +3,7 @@ import { emitWrapper } from "../src/emitter.ts";
 
 const TEST_OUT_DIR = "./dist/test-adapters";
 
-describe("@arkane/cli Emitter", () => {
+describe("@arkano/cli Emitter", () => {
 	afterAll(async () => {
 		try {
 			await Deno.remove(TEST_OUT_DIR, { recursive: true });
@@ -22,9 +22,9 @@ describe("@arkane/cli Emitter", () => {
 		});
 
 		const fileContent = await Deno.readTextFile(emittedPath);
-		expect(fileContent).toContain("import { arkane } from '@arkane/react'");
+		expect(fileContent).toContain("import { arkano } from '@arkano/react'");
 		expect(fileContent).toContain(
-			"export const Counter = arkane(SvelteCounter)",
+			"export const Counter = arkano(SvelteCounter)",
 		);
 		expect(fileContent).toContain("onCountChange?: (value: any) => void;");
 		expect(fileContent).toContain("export default Counter");
@@ -40,9 +40,9 @@ describe("@arkane/cli Emitter", () => {
 		});
 
 		const fileContent = await Deno.readTextFile(emittedPath);
-		expect(fileContent).toContain("import { arkane } from '@arkane/vue'");
+		expect(fileContent).toContain("import { arkano } from '@arkano/vue'");
 		expect(fileContent).toContain(
-			"export const Counter = arkane(SvelteCounter)",
+			"export const Counter = arkano(SvelteCounter)",
 		);
 		expect(fileContent).toContain("'onUpdate:count'?: (value: any) => void;");
 		expect(fileContent).toContain("export default Counter");

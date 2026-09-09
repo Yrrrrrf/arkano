@@ -5,7 +5,7 @@
 [positional-arguments]
 [script]
 ci *flags:
-    just _banner "RUNNING ARKANE CI CONVERGENCE GATE"
+    just _banner "RUNNING ARKANO CI CONVERGENCE GATE"
     print "▶ [Phase 1/6] Biome Formatting Verification..."
     just fmt-check
     print "▶ [Phase 2/6] Biome Lint Verification..."
@@ -20,7 +20,7 @@ ci *flags:
     just build
     print "\n🎉 ALL CI GATES GREEN — CONVERGENCE PASSED."
 
-[doc('Package Arkane distribution via tsdown')]
+[doc('Package Arkano distribution via tsdown')]
 [group('deploy')]
 [positional-arguments]
 [script]

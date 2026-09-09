@@ -23,6 +23,6 @@
 		"vue",
 		"rolldown",
 		"rolldown/filter",
-		"workspace:@arkane"
+		"workspace:@arkano"
 	]
 }

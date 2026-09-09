@@ -8,6 +8,6 @@
 	"imports": {
 		"vue": "npm:vue",
 		"@vitejs/plugin-vue": "npm:@vitejs/plugin-vue",
-		"@arkane/vue": "workspace:@arkane/vue"
+		"@arkano/vue": "workspace:@arkano/vue"
 	}
 }

@@ -6,7 +6,7 @@ import type {
 	ResolvedConfig,
 } from "vite";
 
-export interface ArkanePluginOptions {
+export interface ArkanoPluginOptions {
 	/** Target framework to adapt to: 'react', 'vue', or 'auto'. Defaults to 'auto' */
 	target?: "react" | "vue" | "auto";
 	/** Glob pattern for auto-wrapping Svelte components without query params */
@@ -14,25 +14,25 @@ export interface ArkanePluginOptions {
 }
 
 /**
- * Arkane Vite 8 & Rolldown Compiler Plugin.
+ * Arkano Vite 8 & Rolldown Compiler Plugin.
  *
  * Transparently bridges Svelte 5 Runes into React 19 and Vue 3.5 host applications.
  *
  * Features:
  * - Rolldown native Rust hook filters (`filter.id`) for zero-overhead native resolution.
- * - Named AST-compliant React Function Components (`ArkaneReactBridge`) and Vue `defineComponent` (`ArkaneVueBridge`).
+ * - Named AST-compliant React Function Components (`ArkanoReactBridge`) and Vue `defineComponent` (`ArkanoVueBridge`).
  * - Recursion guard: Svelte sub-components and internal Svelte virtual queries remain pure Svelte.
  * - Vite 8 Environment API `hotUpdate` isolating HMR invalidations to virtual adapter boundaries.
  */
-export function createArkaneCorePlugin(
-	options: ArkanePluginOptions = {},
+export function createArkanoCorePlugin(
+	options: ArkanoPluginOptions = {},
 ): Plugin {
 	let targetFramework: "react" | "vue" =
 		options.target && options.target !== "auto" ? options.target : "react";
 	let _config: ResolvedConfig | undefined;
 
 	return {
-		name: "vite-plugin-arkane",
+		name: "vite-plugin-arkano",
 		enforce: "pre", // Intercepts .svelte imports before @sveltejs/vite-plugin-svelte
 
 		configResolved(resolvedConfig) {
@@ -84,7 +84,7 @@ export function createArkaneCorePlugin(
 				// Pass through virtual modules, raw queries, svelte internals, or pure Svelte sub-components
 				if (
 					source.startsWith("\0") ||
-					source.includes("?arkane-raw") ||
+					source.includes("?arkano-raw") ||
 					source.includes("?svelte") ||
 					source.includes("&svelte") ||
 					(importer &&
@@ -108,26 +108,26 @@ export function createArkaneCorePlugin(
 						? "react"
 						: targetFramework;
 
-				return `\0arkane:${effectiveTarget}:${cleanPath}`;
+				return `\0arkano:${effectiveTarget}:${cleanPath}`;
 			},
 		},
 
 		load: {
-			filter: { id: prefixRegex("\0arkane:") },
+			filter: { id: prefixRegex("\0arkano:") },
 			handler(id) {
-				const isReact = id.startsWith("\0arkane:react:");
-				const isVue = id.startsWith("\0arkane:vue:");
-				const sveltePath = id.replace(/^\0arkane:(react|vue):/, "");
-				const rawImport = `${sveltePath}?arkane-raw`;
+				const isReact = id.startsWith("\0arkano:react:");
+				const isVue = id.startsWith("\0arkano:vue:");
+				const sveltePath = id.replace(/^\0arkano:(react|vue):/, "");
+				const rawImport = `${sveltePath}?arkano-raw`;
 
 				if (isReact) {
 					return `
 import React from 'react';
-import { Arkane } from '@arkane/react';
+import { Arkano } from '@arkano/react';
 import SvelteComponent from '${rawImport}';
 
-export default function ArkaneReactBridge(props) {
-  return React.createElement(Arkane, { this: SvelteComponent, ...props });
+export default function ArkanoReactBridge(props) {
+  return React.createElement(Arkano, { this: SvelteComponent, ...props });
 }
 export * from '${rawImport}';
 `;
@@ -136,14 +136,14 @@ export * from '${rawImport}';
 				if (isVue) {
 					return `
 import { defineComponent, h } from 'vue';
-import { Arkane } from '@arkane/vue';
+import { Arkano } from '@arkano/vue';
 import SvelteComponent from '${rawImport}';
 
 export default defineComponent({
-  name: 'ArkaneVueBridge',
+  name: 'ArkanoVueBridge',
   inheritAttrs: false,
   setup(_, { attrs, slots }) {
-    return () => h(Arkane, { this: SvelteComponent, ...attrs }, slots);
+    return () => h(Arkano, { this: SvelteComponent, ...attrs }, slots);
   }
 });
 export * from '${rawImport}';
@@ -165,7 +165,7 @@ export * from '${rawImport}';
 			const affectedAdapters = Array.from(
 				devEnv.moduleGraph.idToModuleMap.values(),
 			).filter(
-				(mod) => mod.id?.startsWith("\0arkane:") && mod.id.includes(file),
+				(mod) => mod.id?.startsWith("\0arkano:") && mod.id.includes(file),
 			);
 
 			if (affectedAdapters.length === 0) {
@@ -179,7 +179,7 @@ export * from '${rawImport}';
 			// Scoped HMR event push via Environment API
 			devEnv.hot.send({
 				type: "custom",
-				event: "arkane:hmr-reload",
+				event: "arkano:hmr-reload",
 				data: { file, timestamp },
 			});
 

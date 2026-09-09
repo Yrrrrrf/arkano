@@ -1,10 +1,10 @@
 import react from "@vitejs/plugin-react";
-import { arkane, defineGWA, type PluginOption } from "../../config/app.config.ts";
+import { arkano, defineGWA, type PluginOption } from "../../config/app.config.ts";
 
 export default defineGWA({
 	plugins: [
 		react() as PluginOption,
-		arkane({ target: "react" }) as PluginOption,
+		arkano({ target: "react" }) as PluginOption,
 	],
 	overrides: {
 		test: {

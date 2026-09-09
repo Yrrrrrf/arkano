@@ -3,11 +3,11 @@ import { describe, expect, it, vi } from "vitest";
 import { ref } from "vue";
 // @ts-expect-error - Svelte fixture import
 import Counter from "../../../fixtures/components/Counter.svelte";
-import { Arkane } from "../src/host.svelte.ts";
+import { Arkano } from "../src/host.svelte.ts";
 
-describe("Vue 3.5 <Arkane /> Host", () => {
+describe("Vue 3.5 <Arkano /> Host", () => {
 	it("renders with layout-invisible display: contents container", () => {
-		const wrapper = mountVue(Arkane, {
+		const wrapper = mountVue(Arkano, {
 			props: {
 				this: Counter,
 				as: "span",
@@ -25,11 +25,11 @@ describe("Vue 3.5 <Arkane /> Host", () => {
 	it("updates props fine-grained via deep watcher without remounting", async () => {
 		const count = ref(1);
 		const wrapper = mountVue({
-			components: { Arkane },
+			components: { Arkano },
 			setup() {
 				return { Counter, count };
 			},
-			template: '<Arkane :this="Counter" :count="count" />',
+			template: '<Arkano :this="Counter" :count="count" />',
 		});
 
 		expect(wrapper.text()).toContain("1");
@@ -43,7 +43,7 @@ describe("Vue 3.5 <Arkane /> Host", () => {
 
 	it("propagates Svelte bindable mutations to Vue update:prop listeners", async () => {
 		const onUpdateCount = vi.fn();
-		const wrapper = mountVue(Arkane, {
+		const wrapper = mountVue(Arkano, {
 			props: {
 				this: Counter,
 			},
@@ -63,7 +63,7 @@ describe("Vue 3.5 <Arkane /> Host", () => {
 	});
 
 	it("unmounts cleanly and invokes Svelte unmount", () => {
-		const wrapper = mountVue(Arkane, {
+		const wrapper = mountVue(Arkano, {
 			props: {
 				this: Counter,
 			},

@@ -1,7 +1,7 @@
 {
-	"name": "@arkane/core",
+	"name": "@arkano/core",
 	"version": "1.0.0",
-	"description": "Core reactive conduit, proxy synchronization, and event normalization for Arkane",
+	"description": "Core reactive conduit, proxy synchronization, and event normalization for Arkano",
 	"license": "MIT",
 	"exports": "./src/index.ts",
 	"imports": {

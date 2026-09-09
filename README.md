@@ -1,18 +1,28 @@
-# ⚡ Arkane: Universal Svelte 5 Runes Conduit for React 19 & Vue 3.5
+# Arkano
 
-> **Zero-Overhead Transparent Conduit.** Seamlessly inscribe Svelte 5 Runes into foreign soil. Import Svelte components directly into React 19 and Vue 3.5 host applications with fine-grained reactivity, layout-invisible containers, and zero boilerplate.
+> **Zero-Overhead Transparent Conduit.** Seamlessly inscribe Svelte 5 Runes into
+> foreign soil. Import Svelte components directly into React 19 and Vue 3.5 host
+> applications with fine-grained reactivity, layout-invisible containers, and
+> zero boilerplate.
 
 ---
 
 ## 🏛️ System Overview
 
-Arkane is an industrial-grade reactivity bridge and compiler plugin that allows Svelte 5 components (powered by Runes `$state`, `$derived`, `$effect`, and `$bindable`) to be consumed natively inside React 19 and Vue 3.5 codebases.
+Arkano is an industrial-grade reactivity bridge and compiler plugin that allows
+Svelte 5 components (powered by Runes `$state`, `$derived`, `$effect`, and
+`$bindable`) to be consumed natively inside React 19 and Vue 3.5 codebases.
 
-- **Zero Legacy:** No codemods, no deprecated wrappers, no migration shims. Direct transparent imports only (`import Counter from './Counter.svelte'`).
-- **Pure Deno 2+ Toolchain:** Built and verified exclusively with Deno 2, Deno Standard Library (`@std/*` via JSR), and modern ESM.
-- **Vite 8 & Rolldown Native:** Native Rust hook filters (`rolldown/filter`) and Environment API HMR boundary isolation.
-- **Fine-Grained Reactivity Conduit:** Dynamic `$state` proxy reconciliation preserves object identity and forwards two-way bindings.
-- **Invisible Host Containers:** Emits `display: contents` semantic containers preserving host layout invariants.
+- **Zero Legacy:** No codemods, no deprecated wrappers, no migration shims.
+  Direct transparent imports only (`import Counter from './Counter.svelte'`).
+- **Pure Deno 2+ Toolchain:** Built and verified exclusively with Deno 2, Deno
+  Standard Library (`@std/*` via JSR), and modern ESM.
+- **Vite 8 & Rolldown Native:** Native Rust hook filters (`rolldown/filter`) and
+  Environment API HMR boundary isolation.
+- **Fine-Grained Reactivity Conduit:** Dynamic `$state` proxy reconciliation
+  preserves object identity and forwards two-way bindings.
+- **Invisible Host Containers:** Emits `display: contents` semantic containers
+  preserving host layout invariants.
 
 ---
 
@@ -25,13 +35,13 @@ flowchart TD
         Vue["Vue 3.5 Component"]
     end
 
-    subgraph ArkaneVite["@arkane/vite & Rolldown"]
+    subgraph ArkanoVite["@arkano/vite & Rolldown"]
         Resolve["resolveId Hook (Rust Filter)"]
         Load["load Hook: Virtual Bridge Synthesizer"]
         HMR["hotUpdate: Environment API Isolation"]
     end
 
-    subgraph ArkaneCore["@arkane/core Reactivity Conduit"]
+    subgraph ArkanoCore["@arkano/core Reactivity Conduit"]
         Conduit["createReactiveConduit ($state Proxy)"]
         Reconcile["In-Place Prop Reconciliation"]
         Binding["Two-Way $bindable Event Traps"]
@@ -45,31 +55,32 @@ flowchart TD
 
     React -->|"import Component from './Comp.svelte'"| Resolve
     Vue -->|"import Component from './Comp.svelte'"| Resolve
-    Resolve -->|"\0arkane:target:path"| Load
-    Load --> ArkaneCore
-    ArkaneCore --> Mount
+    Resolve -->|"\0arkano:target:path"| Load
+    Load --> ArkanoCore
+    ArkanoCore --> Mount
     Mount --> Component
     Component --> Runes
-    HMR -->|"Scoped Invalidation"| ArkaneVite
+    HMR -->|"Scoped Invalidation"| ArkanoVite
 ```
 
 ---
 
 ## 🚀 Transparent Direct Imports
 
-Arkane eliminates wrapper boilerplate. In any React 19 or Vue 3.5 application configured with `@arkane/vite`, simply import your Svelte 5 component directly:
+Arkano eliminates wrapper boilerplate. In any React 19 or Vue 3.5 application
+configured with `@arkano/vite`, simply import your Svelte 5 component directly:
 
 ### React 19
 
 ```tsx
-import Counter from './Counter.svelte';
-import Icon from './Icon.svelte';
+import Counter from "./Counter.svelte";
+import Icon from "./Icon.svelte";
 
 export default function Dashboard() {
   return (
     <div className="flex flex-col items-center gap-4">
       <Icon route="/dashboard" size={24} color="#3b82f6" />
-      <Counter initial={10} onCountChange={(n) => console.log('Count:', n)} />
+      <Counter initial={10} onCountChange={(n) => console.log("Count:", n)} />
     </div>
   );
 }
@@ -96,73 +107,63 @@ const count = ref(0);
 
 ---
 
-## ⚡ Core Reactivity Engine
+## Core Reactivity Engine
 
-1. **`$state` Proxy Conduit:**
-   `createReactiveConduit` instantiates a fine-grained Svelte 5 `$state` proxy that reconciles incoming framework props in-place without breaking object references or triggering full component remounts.
-2. **Two-Way `$bindable` Synchronization:**
-   Set traps on the proxy detect mutations triggered within Svelte's reactive graph and immediately dispatch corresponding framework callbacks:
+1. **`$state` Proxy Conduit:** `createReactiveConduit` instantiates a
+   fine-grained Svelte 5 `$state` proxy that reconciles incoming framework props
+   in-place without breaking object references or triggering full component
+   remounts.
+2. **Two-Way `$bindable` Synchronization:** Set traps on the proxy detect
+   mutations triggered within Svelte's reactive graph and immediately dispatch
+   corresponding framework callbacks:
    - **React:** `on<Prop>Change` (e.g. `onCountChange`) and `onChange`
    - **Vue:** `onUpdate:<prop>` (e.g. `onUpdate:count` for `v-model:count`)
-3. **Layout-Invisible Containers (`display: contents`):**
-   Host elements are wrapped in configurable HTML tags (default: `span`) with `style: { display: "contents" }`, ensuring CSS Grid and Flexbox layouts remain pixel-perfect.
+3. **Layout-Invisible Containers (`display: contents`):** Host elements are
+   wrapped in configurable HTML tags (default: `span`) with
+   `style: { display: "contents" }`, ensuring CSS Grid and Flexbox layouts
+   remain pixel-perfect.
 
 ---
 
-## 🔌 Vite 8 & Rolldown Compiler Plugin
+## Vite 8 & Rolldown Plugin
 
-Arkane composes `@sveltejs/vite-plugin-svelte` with Svelte 5 Runes mode enabled by default:
+Arkano composes `@sveltejs/vite-plugin-svelte` with Svelte 5 Runes mode enabled
+by default:
 
 ```ts
 // vite.config.ts
-import { defineConfig } from 'vite';
-import { arkane } from '@arkane/vite';
-import react from '@vitejs/plugin-react'; // or vue from '@vitejs/plugin-vue'
+import { defineConfig } from "vite";
+import { arkano } from "@arkano/vite";
+import react from "@vitejs/plugin-react"; // or vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
   plugins: [
     react(),
-    arkane(),
+    arkano(),
   ],
 });
 ```
 
-- **Native Rust Hook Filters:** `resolveId` and `load` leverage Rolldown's Rust-native filters (`filter.id`), preventing JS FFI context switches on non-Svelte modules.
-- **Environment API HMR Isolation:** `hotUpdate` scopes invalidation strictly to `this.environment.moduleGraph`, updating only the affected virtual adapter boundaries (`\0arkane:*`) without full page reloads.
+- **Native Rust Hook Filters:** `resolveId` and `load` leverage Rolldown's
+  Rust-native filters (`filter.id`), preventing JS FFI context switches on
+  non-Svelte modules.
+- **Environment API HMR Isolation:** `hotUpdate` scopes invalidation strictly to
+  `this.environment.moduleGraph`, updating only the affected virtual adapter
+  boundaries (`\0arkano:*`) without full page reloads.
 
 ---
 
-## 🛠️ CLI Commands (`@arkane/cli`)
+## Quality Verification
 
-Arkane includes a static code-generation CLI for standalone adapter emission:
-
-```bash
-# Generate typed React 19 and Vue 3.5 adapters with $bindable prop detection
-deno run -A @arkane/cli generate -i ./src/components -o ./dist/adapters -t all
-
-# Start concurrent multi-app development servers
-deno run -A scripts/cli/main.ts dev -A
-
-# Build all workspace applications
-deno run -A scripts/cli/main.ts build -A
-
-# Ensure Deno/Node compatibility symlinks
-deno run -A scripts/cli/main.ts compat
-```
-
----
-
-## 🛡️ Quality Verification & Standards Matrix
-
-| Check | Tool / Engine | Command | Status |
-| :--- | :--- | :--- | :--- |
-| **Node Compat** | Deno CLI Bridge | `deno run -A scripts/cli/main.ts compat` | Verified |
-| **Unit & Integration Tests** | Vitest (13 suites, 44 tests) | `deno run -A npm:vitest run --config ./config/vitest.config.ts` | 100% Pass |
-| **Multi-App Production Build** | Vite 8 + Rolldown | `deno run -A scripts/cli/main.ts build -A` | Verified |
-| **Library Packaging & Audits** | tsdown + publint + attw | `deno run -A npm:tsdown --config ./tsdown.config.ts` | Verified |
-| **Core Deno Typecheck** | Deno Check | `deno check src/core/src/index.ts src/vite/src/index.ts src/cli/src/bin.ts` | Clean |
-| **Svelte 5 Runes Typecheck** | svelte-check-native | `deno run -A npm:svelte-check-native --tsconfig ./config/tsconfig.json --threshold error` | Clean |
-| **React 19 Typecheck** | typescript@6 / tsc | `deno run -A npm:typescript@6/tsc -p ./config/tsconfig.json --noEmit` | Clean |
-| **Vue 3.5 Typecheck** | vue-tsc | `deno run -A npm:vue-tsc -p ./config/tsconfig.json --noEmit` | Clean |
-| **Code Health & Dead Code** | Fallow | `deno run -A npm:fallow health --score -c config/fallowrc.json` | 100 / 100 |
-| **Formatting & Linting** | Biome 2 | `deno run -A npm:@biomejs/biome check --config-path=config/biome.json .` | Clean |
+| Check                          | Tool / Engine                | Command                                                                                   | Status    |
+| :----------------------------- | :--------------------------- | :---------------------------------------------------------------------------------------- | :-------- |
+| **Node Compat**                | Deno CLI Bridge              | `deno run -A scripts/cli/main.ts compat`                                                  | Verified  |
+| **Unit & Integration Tests**   | Vitest (13 suites, 44 tests) | `deno run -A npm:vitest run --config ./config/vitest.config.ts`                           | 100% Pass |
+| **Multi-App Production Build** | Vite 8 + Rolldown            | `deno run -A scripts/cli/main.ts build -A`                                                | Verified  |
+| **Library Packaging & Audits** | tsdown + publint + attw      | `deno run -A npm:tsdown --config ./tsdown.config.ts`                                      | Verified  |
+| **Core Deno Typecheck**        | Deno Check                   | `deno check src/core/src/index.ts src/vite/src/index.ts src/cli/src/bin.ts`               | Clean     |
+| **Svelte 5 Runes Typecheck**   | svelte-check-native          | `deno run -A npm:svelte-check-native --tsconfig ./config/tsconfig.json --threshold error` | Clean     |
+| **React 19 Typecheck**         | typescript@6 / tsc           | `deno run -A npm:typescript@6/tsc -p ./config/tsconfig.json --noEmit`                     | Clean     |
+| **Vue 3.5 Typecheck**          | vue-tsc                      | `deno run -A npm:vue-tsc -p ./config/tsconfig.json --noEmit`                              | Clean     |
+| **Code Health & Dead Code**    | Fallow                       | `deno run -A npm:fallow health --score -c config/fallowrc.json`                           | 100 / 100 |
+| **Formatting & Linting**       | Biome 2                      | `deno run -A npm:@biomejs/biome check --config-path=config/biome.json .`                  | Clean     |

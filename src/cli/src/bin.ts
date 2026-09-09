@@ -6,7 +6,7 @@ import { scanSvelteComponents } from "./scanner.ts";
 
 void (async () => {
 	await new Command()
-		.name("arkane")
+		.name("arkano")
 		.version("1.0.0")
 		.description(
 			"⚡ Inscribe Svelte 5 Runes into foreign soil — Universal Adapter CLI",
@@ -38,7 +38,7 @@ void (async () => {
 		)
 		.action(async ({ in: inDir, out: outDir, target }) => {
 			console.log(
-				colors.bold.cyan("\n⚡ ARKANE: Generating universal conduits...\n"),
+				colors.bold.cyan("\n⚡ ARKANO: Generating universal conduits...\n"),
 			);
 
 			const components = await scanSvelteComponents(inDir);

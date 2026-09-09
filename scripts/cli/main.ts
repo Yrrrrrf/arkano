@@ -1,4 +1,4 @@
-// main.ts — Master Cliffy CLI driver for Arkane applications
+// main.ts — Master Cliffy CLI driver for Arkano applications
 import { Command } from "jsr:@cliffy/command@1.2.1";
 import { CompletionsCommand } from "jsr:@cliffy/command@1.2.1/completions";
 import { HelpCommand } from "jsr:@cliffy/command@1.2.1/help";
@@ -14,9 +14,9 @@ interface GlobalOptions {
 }
 
 const cli = new Command()
-	.name("arkane")
+	.name("arkano")
 	.version("1.0.0")
-	.description("High-performance CLI driver for Arkane applications")
+	.description("High-performance CLI driver for Arkano applications")
 	.default("help")
 	.globalOption("-v, --verbose", "Show verbose process logs")
 	.globalOption("-p, --parallel", "Execute tasks concurrently")
@@ -79,7 +79,7 @@ const cli = new Command()
 		"Build all 3 apps and deploy to GitHub Pages (gh-pages branch)",
 	)
 	.option("--repo <repo:string>", "GitHub repository name", {
-		default: "arkane",
+		default: "arkano",
 	})
 	.option(
 		"--no-push",

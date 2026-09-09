@@ -1,6 +1,6 @@
 # _shared.just — Front door, variables, and VCS hygiene
 
-PROJECT := "arkane"
+PROJECT := "arkano"
 VERSION := `let res = (do { ^git describe --tags --always --dirty } | complete); if $res.exit_code == 0 { $res.stdout | str trim } else { "1.0.0-dev" }`
 CLIENT_DIR := parent_directory(source_directory())
 CLI := "deno run -A " + CLIENT_DIR / "scripts/cli/main.ts"

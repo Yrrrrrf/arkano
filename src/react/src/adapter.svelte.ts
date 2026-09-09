@@ -1,10 +1,10 @@
-import { createPropValidator } from "@arkane/core";
+import { createPropValidator } from "@arkano/core";
 import React from "react";
 import type { Component, ComponentProps } from "svelte";
-import { Arkane } from "./host.svelte.ts";
-import type { ArkaneAdapterOptions, SupportedHostTag } from "./types.ts";
+import { Arkano } from "./host.svelte.ts";
+import type { ArkanoAdapterOptions, SupportedHostTag } from "./types.ts";
 
-export type ArkaneReactComponent<
+export type ArkanoReactComponent<
 	C extends Component<Record<string, unknown>, Record<string, unknown>>,
 > = {
 	(
@@ -21,9 +21,9 @@ export type ArkaneReactComponent<
  * Wraps a Svelte 5 component into a native React 19 component.
  * Supports direct JSX invocation (<Counter count={10} />) with full IntelliSense.
  */
-export function arkane<
+export function arkano<
 	C extends Component<Record<string, unknown>, Record<string, unknown>>,
->(SvelteComponent: C, options?: ArkaneAdapterOptions): ArkaneReactComponent<C> {
+>(SvelteComponent: C, options?: ArkanoAdapterOptions): ArkanoReactComponent<C> {
 	type Props = ComponentProps<C> & {
 		as?: SupportedHostTag;
 		className?: string;
@@ -39,7 +39,7 @@ export function arkane<
 			validator(props);
 		}
 
-		return React.createElement(Arkane, {
+		return React.createElement(Arkano, {
 			this: SvelteComponent,
 			as: as ?? options?.as ?? "span",
 			className: className ?? options?.className,
@@ -49,7 +49,7 @@ export function arkane<
 	};
 
 	const name = (SvelteComponent as { name?: string }).name || "SvelteComponent";
-	ReactBridge.displayName = `arkane(${name})`;
+	ReactBridge.displayName = `arkano(${name})`;
 
 	return ReactBridge;
 }

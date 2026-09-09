@@ -3,11 +3,11 @@ import { useState } from "react";
 import { describe, expect, it, vi } from "vitest";
 // @ts-expect-error - Svelte fixture import
 import Counter from "../../../fixtures/components/Counter.svelte";
-import { Arkane } from "../src/host.svelte.ts";
+import { Arkano } from "../src/host.svelte.ts";
 
-describe("React 19 <Arkane /> Host", () => {
+describe("React 19 <Arkano /> Host", () => {
 	it("renders with layout-invisible display: contents container", () => {
-		const { container } = render(<Arkane this={Counter} initial={0} />);
+		const { container } = render(<Arkano this={Counter} initial={0} />);
 		const hostElement = container.querySelector("span");
 		expect(hostElement).not.toBeNull();
 		expect(hostElement?.style.display).toBe("contents");
@@ -15,14 +15,14 @@ describe("React 19 <Arkane /> Host", () => {
 
 	it("renders custom container tag with className", () => {
 		const { container } = render(
-			<Arkane
+			<Arkano
 				this={Counter}
 				as="div"
-				className="arkane-custom-host"
+				className="arkano-custom-host"
 				initial={5}
 			/>,
 		);
-		const hostElement = container.querySelector("div.arkane-custom-host");
+		const hostElement = container.querySelector("div.arkano-custom-host");
 		expect(hostElement).not.toBeNull();
 		expect(hostElement?.style.display).toBe("contents");
 		expect(screen.getByText("5")).not.toBeNull();
@@ -36,7 +36,7 @@ describe("React 19 <Arkane /> Host", () => {
 					<button type="button" onClick={() => setCount((c) => c + 1)}>
 						Increment Parent
 					</button>
-					<Arkane this={Counter} count={count} />
+					<Arkano this={Counter} count={count} />
 				</div>
 			);
 		}
@@ -57,7 +57,7 @@ describe("React 19 <Arkane /> Host", () => {
 		let capturedRef: HTMLElement | null = null;
 		function RefConsumer() {
 			return (
-				<Arkane
+				<Arkano
 					this={Counter}
 					ref={(node) => {
 						capturedRef = node;
@@ -75,7 +75,7 @@ describe("React 19 <Arkane /> Host", () => {
 
 	it("receives two-way binding callbacks via on<Prop>Change", async () => {
 		const onCountChange = vi.fn();
-		render(<Arkane this={Counter} initial={0} onCountChange={onCountChange} />);
+		render(<Arkano this={Counter} initial={0} onCountChange={onCountChange} />);
 
 		const incrementBtn = screen.getByText("Increment");
 		await act(async () => {

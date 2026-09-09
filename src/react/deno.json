@@ -1,7 +1,7 @@
 {
-	"name": "@arkane/react",
+	"name": "@arkano/react",
 	"version": "1.0.0",
-	"description": "React 19 host, HOC, and hooks for Arkane",
+	"description": "React 19 host, HOC, and hooks for Arkano",
 	"license": "MIT",
 	"exports": "./src/index.ts",
 	"imports": {
@@ -12,6 +12,6 @@
 		"@vitejs/plugin-react": "npm:@vitejs/plugin-react@latest",
 		"@testing-library/react": "npm:@testing-library/react@latest",
 		"svelte": "npm:svelte@^5.0.0",
-		"@arkane/core": "workspace:@arkane/core"
+		"@arkano/core": "workspace:@arkano/core"
 	}
 }

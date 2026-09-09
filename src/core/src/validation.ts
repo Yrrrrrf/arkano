@@ -22,7 +22,7 @@ export function createPropValidator<
 		const out = validator(props);
 		if (out instanceof type.errors) {
 			console.warn(
-				`[Arkane Prop Mismatch] Component received invalid props:\n${out.summary}`,
+				`[Arkano Prop Mismatch] Component received invalid props:\n${out.summary}`,
 			);
 			return false;
 		}

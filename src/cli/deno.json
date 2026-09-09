@@ -1,7 +1,7 @@
 {
-	"name": "@arkane/cli",
+	"name": "@arkano/cli",
 	"version": "1.0.0",
-	"description": "Static code-generation CLI tool for Arkane",
+	"description": "Static code-generation CLI tool for Arkano",
 	"license": "MIT",
 	"exports": {
 		".": "./src/index.ts",

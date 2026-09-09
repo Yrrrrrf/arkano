@@ -1,6 +1,6 @@
-import type { BaseAdapterOptions, SupportedHostTag } from "@arkane/core";
+import type { BaseAdapterOptions, SupportedHostTag } from "@arkano/core";
 
 export type { SupportedHostTag };
 export type SupportedVueHostTag = SupportedHostTag;
 
-export interface ArkaneVueAdapterOptions extends BaseAdapterOptions {}
+export interface ArkanoVueAdapterOptions extends BaseAdapterOptions {}

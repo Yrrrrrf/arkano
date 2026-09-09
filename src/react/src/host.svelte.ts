@@ -1,13 +1,13 @@
-import { type MountedConduit, mountSvelteConduit } from "@arkane/core";
+import { type MountedConduit, mountSvelteConduit } from "@arkano/core";
 import React, { useEffect, useImperativeHandle, useRef } from "react";
 import type { Component } from "svelte";
-import type { ArkaneHostProps } from "./types.ts";
+import type { ArkanoHostProps } from "./types.ts";
 
 /**
- * Arkane Host for React 19.
+ * Arkano Host for React 19.
  * Mounts a Svelte 5 component inside a layout-invisible container with fine-grained reactivity.
  */
-export function Arkane<
+export function Arkano<
 	C extends Component<Record<string, unknown>, Record<string, unknown>>,
 >({
 	this: SvelteComponent,
@@ -15,7 +15,7 @@ export function Arkane<
 	className,
 	ref,
 	...props
-}: ArkaneHostProps<C>): React.ReactElement {
+}: ArkanoHostProps<C>): React.ReactElement {
 	const containerRef = useRef<HTMLElement>(null);
 	const bridgeRef = useRef<MountedConduit | null>(null);
 	const propsRef = useRef(props);
@@ -75,4 +75,4 @@ export function Arkane<
 	});
 }
 
-export { Arkane as Svelte };
+export { Arkano as Svelte };
