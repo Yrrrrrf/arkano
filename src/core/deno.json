@@ -1,0 +1,11 @@
+{
+  "name": "@arkane/core",
+  "version": "1.0.0",
+  "description": "Core reactive conduit, proxy synchronization, and event normalization for Arkane",
+  "license": "MIT",
+  "exports": "./src/index.ts",
+  "imports": {
+    "arktype": "npm:arktype@^2.0.0",
+    "svelte": "npm:svelte@^5.0.0"
+  }
+}

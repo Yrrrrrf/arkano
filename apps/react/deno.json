@@ -1,0 +1,15 @@
+{
+	"name": "@apps/react",
+	"version": "0.0.1",
+	"description": "React variant for GWA Client",
+	"license": "MIT",
+	"authors": ["Yrrrrrf <fer.rezac@outlook.com>"],
+	"exports": "./src/lib/mod.ts",
+	"imports": {
+		"react": "npm:react",
+		"react-dom": "npm:react-dom",
+		"@types/react": "npm:@types/react",
+		"@types/react-dom": "npm:@types/react-dom",
+		"@vitejs/plugin-react": "npm:@vitejs/plugin-react"
+	}
+}

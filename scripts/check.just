@@ -48,6 +48,7 @@ types-react:
 [doc('Type-check Vue 3.5 adapters and definitions (vue-tsc)')]
 [group('check')]
 types-vue:
+    ^deno install --entrypoint npm:vue-tsc npm:typescript@6
     ^deno run -A npm:vue-tsc -p ./config/tsconfig.json --noEmit
 
 [doc('Execute complete multi-engine type checking matrix')]

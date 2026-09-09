@@ -19,6 +19,7 @@
       "@arkane/vue": ["../src/vue/src/index.ts"],
       "@arkane/vite": ["../src/vite/src/index.ts"],
       "@arkane/cli": ["../src/cli/src/index.ts"],
+      "@sdk/ui": ["../fixtures/components/mod.ts"],
       "#fixtures/*": ["../fixtures/*"]
     }
   },

@@ -5,7 +5,8 @@ export default defineConfig({
     globals: true,
     projects: [
       './src/*/vitest.config.ts',
-      './fixtures/vitest.config.ts'
+      './fixtures/vitest.config.ts',
+      './apps/*/vite.config.*'
     ],
     coverage: {
       provider: 'v8',

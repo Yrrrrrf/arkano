@@ -1,0 +1,12 @@
+{
+  "name": "@arkane/vite",
+  "version": "1.0.0",
+  "description": "Vite & Rolldown transform plugin for Arkane",
+  "license": "MIT",
+  "exports": "./src/index.ts",
+  "imports": {
+    "vite": "npm:vite@^8.0.0",
+    "@arkane/react": "../react/src/index.ts",
+    "@arkane/vue": "../vue/src/index.ts"
+  }
+}

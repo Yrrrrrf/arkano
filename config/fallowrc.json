@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
   "entry": ["src/**/src/index.ts", "src/cli/src/bin.ts", "fixtures/**"],
-  "ignorePatterns": ["config/**", "scripts/**", "**/*.test.*", "tsdown.config.ts"],
+  "ignorePatterns": ["config/**", "scripts/**", "**/*.test.*", "tsdown.config.ts", "apps/**"],
   "ignoreDependencies": [
     "@yuku-codegen/binding-linux-x64-gnu",
     "@cliffy/command",

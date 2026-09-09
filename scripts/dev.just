@@ -25,6 +25,7 @@ prune:
 [group('dev')]
 prepare: prune
     ^deno install
+    ^deno install --entrypoint npm:vue-tsc npm:typescript@6
 
 [doc('Start playground dev server')]
 [group('dev')]
