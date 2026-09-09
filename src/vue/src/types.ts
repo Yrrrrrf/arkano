@@ -1,15 +1,6 @@
-export type SupportedVueHostTag =
-  | 'span'
-  | 'div'
-  | 'section'
-  | 'article'
-  | 'header'
-  | 'footer'
-  | 'main';
+import type { SupportedHostTag, BaseAdapterOptions } from "@arkane/core";
 
-export interface ArkaneVueAdapterOptions {
-  /** HTML host container tag. Defaults to 'span' with display: contents */
-  as?: SupportedVueHostTag;
-  /** Optional class name applied to container */
-  className?: string;
-}
+export type { SupportedHostTag };
+export type SupportedVueHostTag = SupportedHostTag;
+
+export interface ArkaneVueAdapterOptions extends BaseAdapterOptions {}

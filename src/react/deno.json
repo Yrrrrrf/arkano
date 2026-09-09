@@ -1,17 +1,17 @@
 {
-  "name": "@arkane/react",
-  "version": "1.0.0",
-  "description": "React 19 host, HOC, and hooks for Arkane",
-  "license": "MIT",
-  "exports": "./src/index.ts",
-  "imports": {
-    "react": "npm:react@^19.0.0",
-    "react-dom": "npm:react-dom@^19.0.0",
-    "@types/react": "npm:@types/react@^19.0.0",
-    "@types/react-dom": "npm:@types/react-dom@^19.0.0",
-    "@vitejs/plugin-react": "npm:@vitejs/plugin-react@latest",
-    "@testing-library/react": "npm:@testing-library/react@latest",
-    "svelte": "npm:svelte@^5.0.0",
-    "@arkane/core": "../core/src/index.ts"
-  }
+	"name": "@arkane/react",
+	"version": "1.0.0",
+	"description": "React 19 host, HOC, and hooks for Arkane",
+	"license": "MIT",
+	"exports": "./src/index.ts",
+	"imports": {
+		"react": "npm:react@^19.0.0",
+		"react-dom": "npm:react-dom@^19.0.0",
+		"@types/react": "npm:@types/react@^19.0.0",
+		"@types/react-dom": "npm:@types/react-dom@^19.0.0",
+		"@vitejs/plugin-react": "npm:@vitejs/plugin-react@latest",
+		"@testing-library/react": "npm:@testing-library/react@latest",
+		"svelte": "npm:svelte@^5.0.0",
+		"@arkane/core": "workspace:@arkane/core"
+	}
 }

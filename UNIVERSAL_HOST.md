@@ -60,7 +60,7 @@ graph TD
 
 ## ⚡ 3. The React 19 Universal Host
 
-**Source**: [`apps/react/src/lib/host.svelte.ts`](file:///home/yrrrrrf/Documents/lab/tek/packages/gwa/template/src/client/apps/react/src/lib/host.svelte.ts)
+**Source**: [`src/react/src/host.svelte.ts`](file:///home/yrrrrrf/Documents/lab/code/typescript/arkane/src/react/src/host.svelte.ts)
 
 ### How It Works
 
@@ -128,7 +128,7 @@ export function App() {
 
 ## 🟢 4. The Vue 3.5 Universal Host
 
-**Source**: [`apps/vue/src/lib/host.svelte.ts`](file:///home/yrrrrrf/Documents/lab/tek/packages/gwa/template/src/client/apps/vue/src/lib/host.svelte.ts)
+**Source**: [`src/vue/src/host.svelte.ts`](file:///home/yrrrrrf/Documents/lab/code/typescript/arkane/src/vue/src/host.svelte.ts)
 
 ### How It Works
 

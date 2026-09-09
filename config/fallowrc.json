@@ -9,6 +9,12 @@
     "@cliffy/ansi",
     "@sveltejs/vite-plugin-svelte",
     "tsdown",
-    "vite-plus"
+    "vite-plus",
+    "arktype",
+    "react",
+    "svelte",
+    "vite",
+    "vue",
+    "workspace:@arkane"
   ]
 }

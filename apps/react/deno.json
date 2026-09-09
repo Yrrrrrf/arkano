@@ -10,6 +10,7 @@
 		"react-dom": "npm:react-dom",
 		"@types/react": "npm:@types/react",
 		"@types/react-dom": "npm:@types/react-dom",
-		"@vitejs/plugin-react": "npm:@vitejs/plugin-react"
+		"@vitejs/plugin-react": "npm:@vitejs/plugin-react",
+		"@arkane/react": "workspace:@arkane/react"
 	}
 }

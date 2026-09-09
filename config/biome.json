@@ -1,51 +1,24 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.5.12/schema.json",
-  "root": false,
-  "files": {
-    "ignoreUnknown": true,
-    "includes": [
-      "src/**",
-      "fixtures/**",
-      "config/**",
-      "scripts/**",
-      "!**/dist",
-      "!**/build",
-      "!**/node_modules",
-      "!**/.svelte-kit",
-      "!**/.vite",
-      "!**/.justcache"
-    ]
-  },
-  "formatter": {
-    "enabled": true,
-    "indentStyle": "space",
-    "indentWidth": 2,
-    "lineWidth": 100
-  },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "complexity": {
-        "noBannedTypes": "off"
-      }
-    }
-  },
-  "overrides": [
-    {
-      "includes": ["**/*.svelte"],
-      "linter": {
-        "rules": {
-          "correctness": {
-            "noUnusedVariables": "off"
-          }
-        }
-      }
-    }
-  ],
-  "javascript": {
-    "formatter": {
-      "quoteStyle": "single",
-      "semicolons": "always"
-    }
-  }
+	"$schema": "https://biomejs.dev/schemas/2.5.12/schema.json",
+	"root": false,
+	"files": {
+		"ignoreUnknown": true,
+		"includes": [
+			"src/**",
+			"fixtures/**",
+			"config/**",
+			"scripts/**",
+			"!**/dist",
+			"!**/build",
+			"!**/node_modules",
+			"!**/.svelte-kit",
+			"!**/.vite",
+			"!**/.justcache"
+		]
+	},
+	"overrides": [
+		{
+			"includes": ["**/*.svelte"]
+		}
+	]
 }

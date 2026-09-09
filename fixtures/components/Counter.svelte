@@ -1,20 +1,20 @@
 <script lang="ts">
 interface Props {
-  initial?: number;
-  count?: number;
-  onchange?: (count: number) => void;
+	initial?: number;
+	count?: number;
+	onchange?: (count: number) => void;
 }
 
 let { initial = 0, count = $bindable(initial), onchange }: Props = $props();
 
 function increment() {
-  count += 1;
-  onchange?.(count);
+	count += 1;
+	onchange?.(count);
 }
 
 function reset() {
-  count = 0;
-  onchange?.(count);
+	count = 0;
+	onchange?.(count);
 }
 </script>
 

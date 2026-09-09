@@ -18,6 +18,15 @@
     "./src/*",
     "./apps/*"
   ],
+  "tasks": {
+    "test": "deno run -A npm:vitest run --config ./config/vitest.config.ts",
+    "test:coverage": "deno run -A npm:vitest run --coverage --config ./config/vitest.config.ts",
+    "test:watch": "deno run -A npm:vitest --config ./config/vitest.config.ts",
+    "check": "deno check src/core/src/index.ts src/vite/src/index.ts src/cli/src/bin.ts",
+    "dev": "deno run -A ./scripts/cli/main.ts dev",
+    "build": "deno run -A ./scripts/cli/main.ts build",
+    "preview": "deno run -A ./scripts/cli/main.ts preview"
+  },
   "overrides": {
     "typescript": "npm:typescript@~6.0.3",
     "vite": "npm:vite@^8.0.0"
