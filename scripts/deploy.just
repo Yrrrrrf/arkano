@@ -25,11 +25,8 @@ ci *flags:
 [positional-arguments]
 [script]
 build *flags:
-    if (which npx | is-not-empty) {
-        ^npx tsdown --config ./tsdown.config.ts
-    } else {
-        ^deno run -A npm:tsdown --config ./tsdown.config.ts
-    }
+    {{ CLI }} compat
+    ^deno run -A npm:tsdown --config ./tsdown.config.ts
 
 [doc('Preview build distribution')]
 [group('deploy')]

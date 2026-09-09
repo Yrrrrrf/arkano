@@ -1,9 +1,9 @@
+import { act, render, screen } from "@testing-library/react";
 import { useState } from "react";
-import { render, screen, act } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { Arkane } from "../src/host.svelte.ts";
 // @ts-expect-error - Svelte fixture import
 import Counter from "../../../fixtures/components/Counter.svelte";
+import { Arkane } from "../src/host.svelte.ts";
 
 describe("React 19 <Arkane /> Host", () => {
 	it("renders with layout-invisible display: contents container", () => {

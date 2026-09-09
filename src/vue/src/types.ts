@@ -1,4 +1,4 @@
-import type { SupportedHostTag, BaseAdapterOptions } from "@arkane/core";
+import type { BaseAdapterOptions, SupportedHostTag } from "@arkane/core";
 
 export type { SupportedHostTag };
 export type SupportedVueHostTag = SupportedHostTag;

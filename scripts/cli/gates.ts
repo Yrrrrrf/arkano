@@ -1,6 +1,5 @@
-// gates.ts — Quality gates, dev server orchestration, and preview server
-import { existsSync } from "jsr:@std/fs@1.0.8";
-import { join } from "jsr:@std/path@1.0.8";
+import { existsSync } from "@std/fs";
+import { join } from "@std/path";
 import {
 	banner,
 	colors,

@@ -1,7 +1,6 @@
-// engine.ts — Process execution and terminal streaming helpers
 import { colors } from "jsr:@cliffy/ansi@1.2.1/colors";
 import { Select } from "jsr:@cliffy/prompt@1.2.1/select";
-import { TextLineStream } from "jsr:@std/streams@1.0.8";
+import { TextLineStream } from "@std/streams";
 
 export { colors, Select };
 

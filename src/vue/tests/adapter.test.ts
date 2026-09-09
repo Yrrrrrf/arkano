@@ -1,10 +1,10 @@
-import { describe, expect, it } from "vitest";
 import { mount as mountVue } from "@vue/test-utils";
-import { arkane, toVue } from "../src/adapter.svelte.ts";
+import { describe, expect, it } from "vitest";
 // @ts-expect-error - Svelte fixture import
 import Counter from "../../../fixtures/components/Counter.svelte";
+import { arkane } from "../src/adapter.svelte.ts";
 
-describe("Vue 3.5 arkane() / toVue() HOC", () => {
+describe("Vue 3.5 arkane() HOC", () => {
 	it("creates an idiomatic Vue component with displayName", () => {
 		const VueCounter = arkane(Counter);
 		expect(VueCounter.name).toContain("arkane(");
@@ -18,8 +18,8 @@ describe("Vue 3.5 arkane() / toVue() HOC", () => {
 		expect(wrapper.text()).toContain("42");
 	});
 
-	it("toVue alias works identically", () => {
-		const VueCounter = toVue(Counter);
+	it("creates an idiomatic Vue component supporting custom options", () => {
+		const VueCounter = arkane(Counter, { as: "div" });
 		const wrapper = mountVue(VueCounter, {
 			attrs: {
 				initial: 99,

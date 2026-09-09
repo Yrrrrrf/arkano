@@ -1,6 +1,6 @@
-import { defineComponent, h } from "vue";
-import type { mount } from "svelte";
 import { createPropValidator } from "@arkane/core";
+import type { mount } from "svelte";
+import { defineComponent, h } from "vue";
 import { Arkane } from "./host.svelte.ts";
 import type { ArkaneVueAdapterOptions } from "./types.ts";
 
@@ -10,7 +10,7 @@ import type { ArkaneVueAdapterOptions } from "./types.ts";
 export function arkane<C extends Parameters<typeof mount>[0]>(
 	SvelteComponent: C,
 	options?: ArkaneVueAdapterOptions,
-) {
+): ReturnType<typeof defineComponent> {
 	const validator = options?.schema
 		? createPropValidator(options.schema)
 		: null;
@@ -36,5 +36,3 @@ export function arkane<C extends Parameters<typeof mount>[0]>(
 		},
 	});
 }
-
-export { arkane as toVue };

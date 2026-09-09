@@ -1,8 +1,8 @@
-import { Command } from "@cliffy/command";
 import { colors } from "@cliffy/ansi/colors";
+import { Command } from "@cliffy/command";
 import { Table } from "@cliffy/table";
-import { scanSvelteComponents } from "./scanner.ts";
 import { emitWrapper } from "./emitter.ts";
+import { scanSvelteComponents } from "./scanner.ts";
 
 void (async () => {
 	await new Command()
@@ -55,6 +55,7 @@ void (async () => {
 						componentName: comp.name,
 						outputDir: `${outDir}/react`,
 						target: "react",
+						bindableProps: comp.bindableProps,
 					});
 					table.push([
 						comp.name,
@@ -69,6 +70,7 @@ void (async () => {
 						componentName: comp.name,
 						outputDir: `${outDir}/vue`,
 						target: "vue",
+						bindableProps: comp.bindableProps,
 					});
 					table.push([
 						comp.name,

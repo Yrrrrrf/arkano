@@ -1,5 +1,5 @@
-import { describe, expect, it, vi } from "vitest";
 import type { DevEnvironment, HotUpdateOptions, ResolvedConfig } from "vite";
+import { describe, expect, it, vi } from "vitest";
 import { arkane, createArkaneCorePlugin } from "../src/index.ts";
 
 describe("@arkane/vite Plugin", () => {

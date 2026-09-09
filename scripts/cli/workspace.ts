@@ -1,6 +1,5 @@
-// workspace.ts — Dynamic workspace discovery and lifecycle maintenance for Arkane
-import { existsSync, walkSync } from "jsr:@std/fs@1.0.8";
-import { join, relative } from "jsr:@std/path@1.0.8";
+import { existsSync, walkSync } from "@std/fs";
+import { join, relative } from "@std/path";
 import { colors } from "./engine.ts";
 
 export interface ClientPackage {
@@ -170,6 +169,62 @@ export function ensureNodeCompat(): void {
 										Deno.symlinkSync(rel, targetSymlink);
 									} catch {
 										// Ignore
+									}
+								}
+							}
+						}
+					}
+				}
+
+				// 3. Ensure platform-specific bindings for tsdown tools (yuku-codegen / yuku-parser)
+				for (const scope of ["@yuku-codegen", "@yuku-parser"]) {
+					const shortScope = scope.slice(1);
+					for (const entry of Deno.readDirSync(denoNm)) {
+						if (entry.name.startsWith(`${shortScope}@`)) {
+							const ver = entry.name.slice(shortScope.length + 1);
+							const pkgDir = join(
+								denoNm,
+								entry.name,
+								"node_modules",
+								shortScope,
+							);
+							if (existsSync(pkgDir)) {
+								const targetScopeDir = join(pkgDir, scope);
+								try {
+									Deno.mkdirSync(targetScopeDir, { recursive: true });
+								} catch {
+									// Ignore
+								}
+								for (const binEntry of Deno.readDirSync(denoNm)) {
+									const prefix = `${scope}+binding-`;
+									if (
+										binEntry.name.startsWith(prefix) &&
+										binEntry.name.endsWith(`@${ver}`)
+									) {
+										const atIdx = binEntry.name.indexOf("@", 1);
+										const pkgRaw =
+											atIdx !== -1
+												? binEntry.name.slice(0, atIdx)
+												: binEntry.name;
+										const subName = pkgRaw.replace(`${scope}+`, "");
+										const symlinkPath = join(targetScopeDir, subName);
+										if (!existsSync(symlinkPath)) {
+											const srcPath = join(
+												denoNm,
+												binEntry.name,
+												"node_modules",
+												scope,
+												subName,
+											);
+											if (existsSync(srcPath)) {
+												const rel = relative(targetScopeDir, srcPath);
+												try {
+													Deno.symlinkSync(rel, symlinkPath);
+												} catch {
+													// Ignore
+												}
+											}
+										}
 									}
 								}
 							}

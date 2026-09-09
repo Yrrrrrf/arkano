@@ -1,14 +1,14 @@
+import { type MountedConduit, mountSvelteConduit } from "@arkane/core";
+import type { mount } from "svelte";
 import {
 	defineComponent,
 	h,
 	onMounted,
 	onUnmounted,
+	type PropType,
 	ref,
 	watch,
-	type PropType,
 } from "vue";
-import type { mount } from "svelte";
-import { mountSvelteConduit, type MountedConduit } from "@arkane/core";
 import type { SupportedVueHostTag } from "./types.ts";
 
 /**

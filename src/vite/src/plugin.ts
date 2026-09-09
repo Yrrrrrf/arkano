@@ -1,10 +1,10 @@
+import { prefixRegex } from "rolldown/filter";
 import type {
 	DevEnvironment,
 	HotUpdateOptions,
 	Plugin,
 	ResolvedConfig,
 } from "vite";
-import { prefixRegex } from "rolldown/filter";
 
 export interface ArkanePluginOptions {
 	/** Target framework to adapt to: 'react', 'vue', or 'auto'. Defaults to 'auto' */

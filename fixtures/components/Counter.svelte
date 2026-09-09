@@ -1,21 +1,21 @@
 <script lang="ts">
-interface Props {
-	initial?: number;
-	count?: number;
-	onchange?: (count: number) => void;
-}
+	interface Props {
+		initial?: number;
+		count?: number;
+		onchange?: (count: number) => void;
+	}
 
-let { initial = 0, count = $bindable(initial), onchange }: Props = $props();
+	let { initial = 0, count = $bindable(initial), onchange }: Props = $props();
 
-let time = $state(new Date());
-let timeString = $derived(time.toLocaleTimeString());
+	let time = $state(new Date());
+	let timeString = $derived(time.toLocaleTimeString());
 
-$effect(() => {
-	const timer = setInterval(() => {
-		time = new Date();
-	}, 1000);
-	return () => clearInterval(timer);
-});
+	$effect(() => {
+		const timer = setInterval(() => {
+			time = new Date();
+		}, 1000);
+		return () => clearInterval(timer);
+	});
 </script>
 
 <div class="card bg-base-200 shadow-md p-6 flex flex-col items-center gap-4">

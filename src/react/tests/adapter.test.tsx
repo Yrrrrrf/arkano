@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { arkane, toReact } from "../src/adapter.svelte.ts";
 // @ts-expect-error - Svelte fixture import
 import Counter from "../../../fixtures/components/Counter.svelte";
+import { arkane } from "../src/adapter.svelte.ts";
 
-describe("React 19 arkane() / toReact() HOC", () => {
+describe("React 19 arkane() HOC", () => {
 	it("creates an idiomatic React component with displayName", () => {
 		const ReactCounter = arkane(Counter);
 		expect(ReactCounter.displayName).toContain("arkane(");
@@ -13,8 +13,11 @@ describe("React 19 arkane() / toReact() HOC", () => {
 		expect(screen.getByText("42")).not.toBeNull();
 	});
 
-	it("toReact alias works identically", () => {
-		const ReactCounter = toReact(Counter);
+	it("creates an idiomatic React component supporting custom options", () => {
+		const ReactCounter = arkane(Counter, {
+			as: "div",
+			className: "custom-counter",
+		});
 		render(<ReactCounter initial={100} />);
 		expect(screen.getByText("100")).not.toBeNull();
 	});

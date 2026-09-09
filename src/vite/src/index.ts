@@ -1,9 +1,9 @@
 import {
-	svelte,
 	type Options as SvelteOptions,
+	svelte,
 } from "@sveltejs/vite-plugin-svelte";
 import type { PluginOption } from "vite";
-import { createArkaneCorePlugin, type ArkanePluginOptions } from "./plugin.ts";
+import { type ArkanePluginOptions, createArkaneCorePlugin } from "./plugin.ts";
 
 export interface ArkaneCompositeOptions extends ArkanePluginOptions {
 	/** Optional configuration options forwarded to @sveltejs/vite-plugin-svelte */
@@ -30,6 +30,5 @@ export function arkane(options: ArkaneCompositeOptions = {}): PluginOption[] {
 	];
 }
 
-export { createArkaneCorePlugin };
 export * from "./plugin.ts";
-export * from "./hmr.ts";
+export { createArkaneCorePlugin };

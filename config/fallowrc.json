@@ -1,22 +1,28 @@
 {
-  "$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
-  "entry": ["src/**/src/index.ts", "src/cli/src/bin.ts", "fixtures/**"],
-  "ignorePatterns": ["config/**", "scripts/**", "**/*.test.*", "tsdown.config.ts", "apps/**"],
-  "ignoreDependencies": [
-    "@yuku-codegen/binding-linux-x64-gnu",
-    "@cliffy/command",
-    "@cliffy/table",
-    "@cliffy/ansi",
-    "@sveltejs/vite-plugin-svelte",
-    "tsdown",
-    "vite-plus",
-    "arktype",
-    "react",
-    "svelte",
-    "vite",
-    "vue",
-    "rolldown",
-    "rolldown/filter",
-    "workspace:@arkane"
-  ]
+	"$schema": "https://raw.githubusercontent.com/fallow-rs/fallow/main/schema.json",
+	"entry": ["src/**/src/index.ts", "src/cli/src/bin.ts", "fixtures/**"],
+	"ignorePatterns": [
+		"config/**",
+		"scripts/**",
+		"**/*.test.*",
+		"tsdown.config.ts",
+		"apps/**"
+	],
+	"ignoreDependencies": [
+		"@yuku-codegen/binding-linux-x64-gnu",
+		"@cliffy/command",
+		"@cliffy/table",
+		"@cliffy/ansi",
+		"@sveltejs/vite-plugin-svelte",
+		"tsdown",
+		"vite-plus",
+		"arktype",
+		"react",
+		"svelte",
+		"vite",
+		"vue",
+		"rolldown",
+		"rolldown/filter",
+		"workspace:@arkane"
+	]
 }

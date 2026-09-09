@@ -1,6 +1,6 @@
+import type { BaseAdapterOptions, SupportedHostTag } from "@arkane/core";
 import type React from "react";
 import type { Component, ComponentProps } from "svelte";
-import type { SupportedHostTag, BaseAdapterOptions } from "@arkane/core";
 
 export type { SupportedHostTag };
 

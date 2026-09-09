@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useImperativeHandle } from "react";
+import { type MountedConduit, mountSvelteConduit } from "@arkane/core";
+import React, { useEffect, useImperativeHandle, useRef } from "react";
 import type { Component } from "svelte";
-import { mountSvelteConduit, type MountedConduit } from "@arkane/core";
 import type { ArkaneHostProps } from "./types.ts";
 
 /**
@@ -15,7 +15,7 @@ export function Arkane<
 	className,
 	ref,
 	...props
-}: ArkaneHostProps<C>) {
+}: ArkaneHostProps<C>): React.ReactElement {
 	const containerRef = useRef<HTMLElement>(null);
 	const bridgeRef = useRef<MountedConduit | null>(null);
 	const propsRef = useRef(props);

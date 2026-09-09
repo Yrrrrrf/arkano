@@ -1,55 +1,69 @@
-import tailwindcss from '@tailwindcss/vite';
-import { defineConfig, type PluginOption, type UserConfig, searchForWorkspaceRoot } from 'vite-plus';
+import tailwindcss from "@tailwindcss/vite";
+import {
+	defineConfig,
+	type PluginOption,
+	searchForWorkspaceRoot,
+	type UserConfig,
+} from "vite-plus";
 
-const SRC_ROOT = new URL('../src', import.meta.url).pathname;
-const FIXTURES_ROOT = new URL('../fixtures', import.meta.url).pathname;
+const SRC_ROOT = new URL("../src", import.meta.url).pathname;
+const FIXTURES_ROOT = new URL("../fixtures", import.meta.url).pathname;
 
 export interface GwaConfig {
-  plugins?: PluginOption[];
-  extraPlugins?: PluginOption[];
-  overrides?: UserConfig;
+	plugins?: PluginOption[];
+	extraPlugins?: PluginOption[];
+	overrides?: UserConfig;
 }
 
 export function defineGWA(options: GwaConfig = {}) {
-  const { plugins = [], extraPlugins = [], overrides = {} } = options;
-  const rootPath =
-    (import.meta as unknown as { dirname?: string }).dirname ??
-    new URL('..', import.meta.url).pathname;
-  const workspaceRoot = searchForWorkspaceRoot(rootPath);
-  const { server: overrideServer, ...restOverrides } = overrides;
+	const { plugins = [], extraPlugins = [], overrides = {} } = options;
+	const rootPath =
+		(import.meta as unknown as { dirname?: string }).dirname ??
+		new URL("..", import.meta.url).pathname;
+	const workspaceRoot = searchForWorkspaceRoot(rootPath);
+	const { server: overrideServer, ...restOverrides } = overrides;
 
-  return defineConfig({
-    server: {
-      fs: {
-        allow: [workspaceRoot],
-        ...(overrideServer?.fs ?? {}),
-      },
-      watch: {
-        ignored: ['!**/fixtures/**', '!**/src/**'],
-        ...(overrideServer?.watch ?? {}),
-      },
-      ...(overrideServer ?? {}),
-    },
-    resolve: {
-      alias: [
-        { find: /^@sdk\/ui$/, replacement: `${FIXTURES_ROOT}/components/mod.ts` },
-        { find: /^@sdk\/ui\/(.*)/, replacement: `${FIXTURES_ROOT}/components/$1` },
-        { find: /^@arkane\/([^/]+)$/, replacement: `${SRC_ROOT}/$1/src/index.ts` },
-        { find: /^@arkane\/(.*)/, replacement: `${SRC_ROOT}/$1` },
-        { find: /^#fixtures\/(.*)/, replacement: `${FIXTURES_ROOT}/$1` },
-        { find: /^#lib\/(.*)/, replacement: '/src/lib/$1' },
-        { find: /^#lib$/, replacement: '/src/lib/mod.ts' },
-      ],
-    },
-    plugins: [tailwindcss() as PluginOption, ...plugins, ...extraPlugins],
-    ssr: {
-      noExternal: ['rune-lab'],
-    },
-    ...restOverrides,
-  });
+	return defineConfig({
+		server: {
+			fs: {
+				allow: [workspaceRoot],
+				...(overrideServer?.fs ?? {}),
+			},
+			watch: {
+				ignored: ["!**/fixtures/**", "!**/src/**"],
+				...(overrideServer?.watch ?? {}),
+			},
+			...(overrideServer ?? {}),
+		},
+		resolve: {
+			alias: [
+				{
+					find: /^@sdk\/ui$/,
+					replacement: `${FIXTURES_ROOT}/components/mod.ts`,
+				},
+				{
+					find: /^@sdk\/ui\/(.*)/,
+					replacement: `${FIXTURES_ROOT}/components/$1`,
+				},
+				{
+					find: /^@arkane\/([^/]+)$/,
+					replacement: `${SRC_ROOT}/$1/src/index.ts`,
+				},
+				{ find: /^@arkane\/(.*)/, replacement: `${SRC_ROOT}/$1` },
+				{ find: /^#fixtures\/(.*)/, replacement: `${FIXTURES_ROOT}/$1` },
+				{ find: /^#lib\/(.*)/, replacement: "/src/lib/$1" },
+				{ find: /^#lib$/, replacement: "/src/lib/mod.ts" },
+			],
+		},
+		plugins: [tailwindcss() as PluginOption, ...plugins, ...extraPlugins],
+		ssr: {
+			noExternal: ["rune-lab"],
+		},
+		...restOverrides,
+	});
 }
 
-export { arkane } from '../src/vite/src/index.ts';
+export { arkane } from "../src/vite/src/index.ts";
 export const defineArkaneApp = defineGWA;
 export default defineGWA();
 export type { PluginOption };

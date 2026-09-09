@@ -1,9 +1,9 @@
-import { describe, expect, it, vi } from "vitest";
 import { mount as mountVue } from "@vue/test-utils";
+import { describe, expect, it, vi } from "vitest";
 import { ref } from "vue";
-import { Arkane } from "../src/host.svelte.ts";
 // @ts-expect-error - Svelte fixture import
 import Counter from "../../../fixtures/components/Counter.svelte";
+import { Arkane } from "../src/host.svelte.ts";
 
 describe("Vue 3.5 <Arkane /> Host", () => {
 	it("renders with layout-invisible display: contents container", () => {

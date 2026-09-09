@@ -1,77 +1,168 @@
-# Project Template (Generic)
+# ⚡ Arkane: Universal Svelte 5 Runes Conduit for React 19 & Vue 3.5
 
-> **Modern Multi-Platform Starter.** A domain-agnostic foundation for building
-> full-stack applications with type-safety and high performance.
+> **Zero-Overhead Transparent Conduit.** Seamlessly inscribe Svelte 5 Runes into foreign soil. Import Svelte components directly into React 19 and Vue 3.5 host applications with fine-grained reactivity, layout-invisible containers, and zero boilerplate.
 
-## 🚀 Architecture
+---
 
-This template follows a strict **Layered & Hexagonal** architecture with a
-**GraphQL Gateway** and **gRPC Service Mesh**:
+## 🏛️ System Overview
 
-### Client (Deno + Svelte 5)
+Arkane is an industrial-grade reactivity bridge and compiler plugin that allows Svelte 5 components (powered by Runes `$state`, `$derived`, `$effect`, and `$bindable`) to be consumed natively inside React 19 and Vue 3.5 codebases.
 
-- **`apps/vision`**: Development showcase app for UI primitives and state
-  testing.
-- **`sdk/ui`**: Shared UI component library using Svelte 5 Runes.
-- **`sdk/state`**: Reactive state management stores.
-- **`sdk/core`**: Domain entities and business logic interfaces (TypeScript).
+- **Zero Legacy:** No codemods, no deprecated wrappers, no migration shims. Direct transparent imports only (`import Counter from './Counter.svelte'`).
+- **Pure Deno 2+ Toolchain:** Built and verified exclusively with Deno 2, Deno Standard Library (`@std/*` via JSR), and modern ESM.
+- **Vite 8 & Rolldown Native:** Native Rust hook filters (`rolldown/filter`) and Environment API HMR boundary isolation.
+- **Fine-Grained Reactivity Conduit:** Dynamic `$state` proxy reconciliation preserves object identity and forwards two-way bindings.
+- **Invisible Host Containers:** Emits `display: contents` semantic containers preserving host layout invariants.
 
-### Server (Rust + Go)
+---
 
-- **`engine/`**: The core business logic engine (Rust).
-  - **`domain`**: Pure business rules and repository traits (Hexagonal/Ports).
-  - **`store`**: Data persistence implementation (SurrealDB).
-  - **`application`**: Transport-agnostic use case orchestration.
-  - **`services/gateway`**: GraphQL Gateway (async-graphql + Axum).
-- **`rpc/`**: Sidecar compute plane (Go).
-  - **`notifier`**: Async notification dispatcher (gRPC).
-  - **`documents`**: Document generation service (gRPC).
-- **`proto/`**: Shared Protobuf contracts managed via **Buf**.
+## 🏗️ Architecture
 
-## 🛠️ Tech Stack
+```mermaid
+flowchart TD
+    subgraph Host["Host Applications"]
+        React["React 19 Component"]
+        Vue["Vue 3.5 Component"]
+    end
 
-- **Frontend**: [SvelteKit 5](https://svelte.dev/) (Runes),
-  [Deno](https://deno.com/), [Vanilla CSS]
-- **Backend**: [Rust](https://www.rust-lang.org/), [Go](https://go.dev/)
-- **API**: [GraphQL](https://graphql.org/) (External), [gRPC](https://grpc.io/)
-  (Internal)
-- **Database**: [SurrealDB](https://surrealdb.com/)
-- **Infrastructure**: [Docker Compose](https://www.docker.com/),
-  [Nix](https://nixos.org/), [Just](https://github.com/casey/just)
+    subgraph ArkaneVite["@arkane/vite & Rolldown"]
+        Resolve["resolveId Hook (Rust Filter)"]
+        Load["load Hook: Virtual Bridge Synthesizer"]
+        HMR["hotUpdate: Environment API Isolation"]
+    end
 
-## 🚦 Getting Started
+    subgraph ArkaneCore["@arkane/core Reactivity Conduit"]
+        Conduit["createReactiveConduit ($state Proxy)"]
+        Reconcile["In-Place Prop Reconciliation"]
+        Binding["Two-Way $bindable Event Traps"]
+        Mount["mountSvelteConduit / unmount"]
+    end
 
-### Prerequisites
+    subgraph Svelte5["Svelte 5 Runes Engine"]
+        Component["Svelte 5 Component (.svelte)"]
+        Runes["$state / $derived / $bindable / $effect"]
+    end
 
-- [Nix](https://nixos.org/) (highly recommended) or:
-- [Deno](https://deno.com/), [Rust](https://www.rust-lang.org/),
-  [Go](https://go.dev/), [Just](https://github.com/casey/just),
-  [Buf](https://buf.build/)
+    React -->|"import Component from './Comp.svelte'"| Resolve
+    Vue -->|"import Component from './Comp.svelte'"| Resolve
+    Resolve -->|"\0arkane:target:path"| Load
+    Load --> ArkaneCore
+    ArkaneCore --> Mount
+    Mount --> Component
+    Component --> Runes
+    HMR -->|"Scoped Invalidation"| ArkaneVite
+```
 
-### Development
+---
+
+## 🚀 Transparent Direct Imports
+
+Arkane eliminates wrapper boilerplate. In any React 19 or Vue 3.5 application configured with `@arkane/vite`, simply import your Svelte 5 component directly:
+
+### React 19
+
+```tsx
+import Counter from './Counter.svelte';
+import Icon from './Icon.svelte';
+
+export default function Dashboard() {
+  return (
+    <div className="flex flex-col items-center gap-4">
+      <Icon route="/dashboard" size={24} color="#3b82f6" />
+      <Counter initial={10} onCountChange={(n) => console.log('Count:', n)} />
+    </div>
+  );
+}
+```
+
+### Vue 3.5
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue';
+import Counter from './Counter.svelte';
+import Icon from './Icon.svelte';
+
+const count = ref(0);
+</script>
+
+<template>
+  <div class="flex flex-col items-center gap-4">
+    <Icon route="/dashboard" :size="24" color="#10b981" />
+    <Counter v-model:count="count" />
+  </div>
+</template>
+```
+
+---
+
+## ⚡ Core Reactivity Engine
+
+1. **`$state` Proxy Conduit:**
+   `createReactiveConduit` instantiates a fine-grained Svelte 5 `$state` proxy that reconciles incoming framework props in-place without breaking object references or triggering full component remounts.
+2. **Two-Way `$bindable` Synchronization:**
+   Set traps on the proxy detect mutations triggered within Svelte's reactive graph and immediately dispatch corresponding framework callbacks:
+   - **React:** `on<Prop>Change` (e.g. `onCountChange`) and `onChange`
+   - **Vue:** `onUpdate:<prop>` (e.g. `onUpdate:count` for `v-model:count`)
+3. **Layout-Invisible Containers (`display: contents`):**
+   Host elements are wrapped in configurable HTML tags (default: `span`) with `style: { display: "contents" }`, ensuring CSS Grid and Flexbox layouts remain pixel-perfect.
+
+---
+
+## 🔌 Vite 8 & Rolldown Compiler Plugin
+
+Arkane composes `@sveltejs/vite-plugin-svelte` with Svelte 5 Runes mode enabled by default:
+
+```ts
+// vite.config.ts
+import { defineConfig } from 'vite';
+import { arkane } from '@arkane/vite';
+import react from '@vitejs/plugin-react'; // or vue from '@vitejs/plugin-vue'
+
+export default defineConfig({
+  plugins: [
+    react(),
+    arkane(),
+  ],
+});
+```
+
+- **Native Rust Hook Filters:** `resolveId` and `load` leverage Rolldown's Rust-native filters (`filter.id`), preventing JS FFI context switches on non-Svelte modules.
+- **Environment API HMR Isolation:** `hotUpdate` scopes invalidation strictly to `this.environment.moduleGraph`, updating only the affected virtual adapter boundaries (`\0arkane:*`) without full page reloads.
+
+---
+
+## 🛠️ CLI Commands (`@arkane/cli`)
+
+Arkane includes a static code-generation CLI for standalone adapter emission:
 
 ```bash
-# Generate code from proto
-just server::rpc::generate
+# Generate typed React 19 and Vue 3.5 adapters with $bindable prop detection
+deno run -A @arkane/cli generate -i ./src/components -o ./dist/adapters -t all
 
-# Start all services
-just run
+# Start concurrent multi-app development servers
+deno run -A scripts/cli/main.ts dev -A
 
-# Run server quality gate (fmt + lint + types)
-just server::check
+# Build all workspace applications
+deno run -A scripts/cli/main.ts build -A
+
+# Ensure Deno/Node compatibility symlinks
+deno run -A scripts/cli/main.ts compat
 ```
 
-## 📂 Project Structure
+---
 
-```text
-template/
-├── src/
-│   ├── client/          # SvelteKit + Deno SDK
-│   └── server/          # Rust engine + Go RPC
-│       ├── proto/       # Shared Protobuf definitions
-│       ├── engine/      # Rust Hexagonal Core + GraphQL Gateway
-│       ├── rpc/         # Go gRPC services
-│       └── db/          # Database tests & tools
-├── scripts/             # CI/CD & Dev scripts
-└── docker-compose.yml   # Infrastructure orchestration
-```
+## 🛡️ Quality Verification & Standards Matrix
+
+| Check | Tool / Engine | Command | Status |
+| :--- | :--- | :--- | :--- |
+| **Node Compat** | Deno CLI Bridge | `deno run -A scripts/cli/main.ts compat` | Verified |
+| **Unit & Integration Tests** | Vitest (13 suites, 44 tests) | `deno run -A npm:vitest run --config ./config/vitest.config.ts` | 100% Pass |
+| **Multi-App Production Build** | Vite 8 + Rolldown | `deno run -A scripts/cli/main.ts build -A` | Verified |
+| **Library Packaging & Audits** | tsdown + publint + attw | `deno run -A npm:tsdown --config ./tsdown.config.ts` | Verified |
+| **Core Deno Typecheck** | Deno Check | `deno check src/core/src/index.ts src/vite/src/index.ts src/cli/src/bin.ts` | Clean |
+| **Svelte 5 Runes Typecheck** | svelte-check-native | `deno run -A npm:svelte-check-native --tsconfig ./config/tsconfig.json --threshold error` | Clean |
+| **React 19 Typecheck** | typescript@6 / tsc | `deno run -A npm:typescript@6/tsc -p ./config/tsconfig.json --noEmit` | Clean |
+| **Vue 3.5 Typecheck** | vue-tsc | `deno run -A npm:vue-tsc -p ./config/tsconfig.json --noEmit` | Clean |
+| **Code Health & Dead Code** | Fallow | `deno run -A npm:fallow health --score -c config/fallowrc.json` | 100 / 100 |
+| **Formatting & Linting** | Biome 2 | `deno run -A npm:@biomejs/biome check --config-path=config/biome.json .` | Clean |
