@@ -2,7 +2,7 @@
 import { Command } from "jsr:@cliffy/command@1.2.1";
 import { CompletionsCommand } from "jsr:@cliffy/command@1.2.1/completions";
 import { HelpCommand } from "jsr:@cliffy/command@1.2.1/help";
-import { runBuildGate, runDev, runPreview } from "./gates.ts";
+import { runBuildGate, runDev, runPagesGate, runPreview } from "./gates.ts";
 import { ensureNodeCompat } from "./workspace.ts";
 
 interface GlobalOptions {
@@ -73,6 +73,29 @@ const cli = new Command()
 			targetApp,
 		);
 	})
+	// ── PAGES ───────────────────────────────────────────────────────────
+	.command(
+		"pages",
+		"Build all 3 apps and deploy to GitHub Pages (gh-pages branch)",
+	)
+	.option("--repo <repo:string>", "GitHub repository name", {
+		default: "arkane",
+	})
+	.option(
+		"--no-push",
+		"Assemble deployment bundle locally without pushing to GitHub",
+	)
+	.action(
+		async (options: GlobalOptions & { repo?: string; push?: boolean }) => {
+			ensureNodeCompat();
+			await runPagesGate({
+				verbose: options.verbose,
+				parallel: options.parallel,
+				repo: options.repo,
+				push: options.push,
+			});
+		},
+	)
 	// ── COMPAT ──────────────────────────────────────────────────────────
 	.command("compat", "Ensure node_modules symlinks and compatibility layer")
 	.action(() => {

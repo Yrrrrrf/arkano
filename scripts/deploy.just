@@ -33,9 +33,23 @@ build *flags:
 preview: build
     ^deno run -A npm:vite preview
 
-[doc('Publish Arkane release (gated by CI and clean tree)')]
+[doc('Build all 3 apps and deploy to GitHub Pages (gh-pages)')]
 [group('deploy')]
-[confirm("Ship release to production?")]
-publish: _clean-tree ci build
-    just _banner "shipping {{PROJECT}} {{VERSION}}"
-    @print "Published {{PROJECT}} {{VERSION}} successfully"
+pages *flags:
+    {{ CLI }} pages {{ flags }}
+
+_with-brave +cmd:
+    #!/usr/bin/env nu
+    let d = (mktemp -d)
+    "#!/usr/bin/env nu\ndef main [...args] { exec brave ...$args }" | save -f $"($d)/xdg-open"
+    chmod +x $"($d)/xdg-open"
+    with-env { PATH: ($env.PATH | prepend $d) } { {{ cmd }} }
+    print "✓ {{ cmd }} done"
+
+[doc('Publish build/ to npm')]
+[group('deploy')]
+publish: build (_with-brave "bun publish")
+
+[doc('npm login')]
+[group('deploy')]
+login: (_with-brave "bunx npm login")

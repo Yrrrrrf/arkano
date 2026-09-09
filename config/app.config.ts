@@ -23,7 +23,23 @@ export function defineGWA(options: GwaConfig = {}) {
 	const workspaceRoot = searchForWorkspaceRoot(rootPath);
 	const { server: overrideServer, ...restOverrides } = overrides;
 
+	const globalEnv = globalThis as unknown as {
+		Deno?: { env: { get: (key: string) => string | undefined } };
+		process?: { env?: Record<string, string> };
+	};
+
+	const rawBase =
+		globalEnv.Deno?.env?.get("BASE_PATH") ??
+		globalEnv.process?.env?.BASE_PATH ??
+		"";
+	const base = rawBase
+		? rawBase.endsWith("/")
+			? rawBase
+			: `${rawBase}/`
+		: undefined;
+
 	return defineConfig({
+		base,
 		server: {
 			fs: {
 				allow: [workspaceRoot],
