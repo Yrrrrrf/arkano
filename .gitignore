@@ -16,6 +16,7 @@ temp
 build
 dist
 coverage
+package.json
 # *.pdf
 
 # ide configuration files 

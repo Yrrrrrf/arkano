@@ -15,6 +15,12 @@ export default defineConfig({
 	clean: true,
 	bundleless: false,
 	platform: "neutral",
+	copy: [
+		{
+			from: "src/vite/client.d.ts",
+			to: "dist/vite",
+		},
+	],
 	deps: {
 		neverBundle: [
 			"svelte",

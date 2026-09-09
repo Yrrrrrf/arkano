@@ -46,9 +46,21 @@ _with-brave +cmd:
     with-env { PATH: ($env.PATH | prepend $d) } { {{ cmd }} }
     print "✓ {{ cmd }} done"
 
-[doc('Publish build/ to npm')]
+[doc('Publish build/ to npm with ephemeral package.json adaptation')]
 [group('deploy')]
-publish: build (_with-brave "bun publish")
+[positional-arguments]
+[script]
+publish *flags: build
+    ^deno run -A scripts/manifest.ts generate
+    let cmd = ("bun publish " + ("{{ flags }}" | str trim) | str trim)
+    try {
+        just _with-brave $cmd
+        ^deno run -A scripts/manifest.ts clean
+    } catch { |err|
+        ^deno run -A scripts/manifest.ts clean
+        error make { msg: $"Publish failed: ($err.msg? | default 'unknown error')" }
+    }
+    print "🎉 Publish lifecycle complete — Deno exclusivity preserved."
 
 [doc('npm login')]
 [group('deploy')]

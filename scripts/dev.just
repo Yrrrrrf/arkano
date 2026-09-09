@@ -12,6 +12,7 @@ prune:
         "build"
         "coverage"
         ".justcache"
+        "package.json"
     ]
     for target in $targets {
         if ($target | path exists) {
