@@ -3,9 +3,14 @@
 	"version": "1.0.0",
 	"description": "Vite & Rolldown transform plugin for Arkane",
 	"license": "MIT",
-	"exports": "./src/index.ts",
+	"exports": {
+		".": "./src/index.ts",
+		"./client": "./client.d.ts"
+	},
 	"imports": {
 		"vite": "npm:vite@^8.0.0",
+		"@sveltejs/vite-plugin-svelte": "npm:@sveltejs/vite-plugin-svelte@^7.0.0",
+		"rolldown/filter": "npm:rolldown@^1.2.7/filter",
 		"@arkane/react": "workspace:@arkane/react",
 		"@arkane/vue": "workspace:@arkane/vue"
 	}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { render, screen, act } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { Arkane } from "../src/host.svelte.ts";
 // @ts-expect-error - Svelte fixture import
 import Counter from "../../../fixtures/components/Counter.svelte";
@@ -71,5 +71,17 @@ describe("React 19 <Arkane /> Host", () => {
 		expect((capturedRef as HTMLElement | null)?.tagName.toLowerCase()).toBe(
 			"span",
 		);
+	});
+
+	it("receives two-way binding callbacks via on<Prop>Change", async () => {
+		const onCountChange = vi.fn();
+		render(<Arkane this={Counter} initial={0} onCountChange={onCountChange} />);
+
+		const incrementBtn = screen.getByText("Increment");
+		await act(async () => {
+			incrementBtn.click();
+		});
+
+		expect(onCountChange).toHaveBeenCalledWith(1);
 	});
 });

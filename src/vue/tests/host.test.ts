@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { mount as mountVue } from "@vue/test-utils";
 import { ref } from "vue";
 import { Arkane } from "../src/host.svelte.ts";
@@ -39,6 +39,27 @@ describe("Vue 3.5 <Arkane /> Host", () => {
 		await wrapper.vm.$nextTick();
 
 		expect(wrapper.text()).toContain("5");
+	});
+
+	it("propagates Svelte bindable mutations to Vue update:prop listeners", async () => {
+		const onUpdateCount = vi.fn();
+		const wrapper = mountVue(Arkane, {
+			props: {
+				this: Counter,
+			},
+			attrs: {
+				initial: 0,
+				"onUpdate:count": onUpdateCount,
+			},
+		});
+
+		const incrementBtn = wrapper
+			.findAll("button")
+			.find((b) => b.text().includes("Increment"));
+		expect(incrementBtn).toBeDefined();
+		await incrementBtn?.trigger("click");
+
+		expect(onUpdateCount).toHaveBeenCalledWith(1);
 	});
 
 	it("unmounts cleanly and invokes Svelte unmount", () => {

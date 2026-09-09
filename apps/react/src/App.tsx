@@ -1,4 +1,6 @@
-import { Counter, Icon, faviconUrl } from "#lib";
+import Counter from "@sdk/ui/Counter.svelte";
+import Icon from "@sdk/ui/Icon.svelte";
+import { faviconUrl } from "#lib";
 import pkg from "../deno.json" with { type: "json" };
 
 export default function App() {

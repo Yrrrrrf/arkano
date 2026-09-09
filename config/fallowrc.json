@@ -15,6 +15,8 @@
     "svelte",
     "vite",
     "vue",
+    "rolldown",
+    "rolldown/filter",
     "workspace:@arkane"
   ]
 }

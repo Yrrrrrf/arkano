@@ -39,6 +39,28 @@ export const Arkane = defineComponent({
 				props.this,
 				containerRef.value,
 				attrs as Record<string, unknown>,
+				{
+					onBindableChange(key: string, value: unknown) {
+						const currentAttrs = attrs as Record<string, unknown>;
+						const updateHandler = currentAttrs[`onUpdate:${key}`];
+						if (typeof updateHandler === "function") {
+							(updateHandler as (val: unknown) => void)(value);
+						}
+						if (key === "value") {
+							const modelUpdate = currentAttrs["onUpdate:modelValue"];
+							if (typeof modelUpdate === "function") {
+								(modelUpdate as (val: unknown) => void)(value);
+							}
+						}
+						if (key === "value" || key === "modelValue") {
+							const changeHandler =
+								currentAttrs.onChange ?? currentAttrs.onchange;
+							if (typeof changeHandler === "function") {
+								(changeHandler as (val: unknown) => void)(value);
+							}
+						}
+					},
+				},
 			);
 		});
 

@@ -1,5 +1,5 @@
 import tailwindcss from '@tailwindcss/vite';
-import { defineConfig, type PluginOption, type UserConfig } from 'vite-plus';
+import { defineConfig, type PluginOption, type UserConfig, searchForWorkspaceRoot } from 'vite-plus';
 
 const SRC_ROOT = new URL('../src', import.meta.url).pathname;
 const FIXTURES_ROOT = new URL('../fixtures', import.meta.url).pathname;
@@ -12,8 +12,24 @@ export interface GwaConfig {
 
 export function defineGWA(options: GwaConfig = {}) {
   const { plugins = [], extraPlugins = [], overrides = {} } = options;
+  const rootPath =
+    (import.meta as unknown as { dirname?: string }).dirname ??
+    new URL('..', import.meta.url).pathname;
+  const workspaceRoot = searchForWorkspaceRoot(rootPath);
+  const { server: overrideServer, ...restOverrides } = overrides;
 
   return defineConfig({
+    server: {
+      fs: {
+        allow: [workspaceRoot],
+        ...(overrideServer?.fs ?? {}),
+      },
+      watch: {
+        ignored: ['!**/fixtures/**', '!**/src/**'],
+        ...(overrideServer?.watch ?? {}),
+      },
+      ...(overrideServer ?? {}),
+    },
     resolve: {
       alias: [
         { find: /^@sdk\/ui$/, replacement: `${FIXTURES_ROOT}/components/mod.ts` },
@@ -29,10 +45,11 @@ export function defineGWA(options: GwaConfig = {}) {
     ssr: {
       noExternal: ['rune-lab'],
     },
-    ...overrides,
+    ...restOverrides,
   });
 }
 
+export { arkane } from '../src/vite/src/index.ts';
 export const defineArkaneApp = defineGWA;
 export default defineGWA();
 export type { PluginOption };

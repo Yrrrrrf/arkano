@@ -18,6 +18,8 @@ export function Arkane<
 }: ArkaneHostProps<C>) {
 	const containerRef = useRef<HTMLElement>(null);
 	const bridgeRef = useRef<MountedConduit | null>(null);
+	const propsRef = useRef(props);
+	propsRef.current = props;
 
 	// React 19 ref forwarding directly to container DOM node
 	useImperativeHandle(ref, () => containerRef.current as HTMLElement);
@@ -30,6 +32,26 @@ export function Arkane<
 			SvelteComponent,
 			containerRef.current,
 			props as Record<string, unknown>,
+			{
+				onBindableChange(key: string, value: unknown) {
+					const currentProps = propsRef.current as Record<string, unknown>;
+					const capitalizedKey = key.charAt(0).toUpperCase() + key.slice(1);
+					const specificHandler = currentProps[`on${capitalizedKey}Change`];
+					if (typeof specificHandler === "function") {
+						(specificHandler as (val: unknown) => void)(value);
+					}
+					const lowerHandler = currentProps[`on${key}change`];
+					if (typeof lowerHandler === "function") {
+						(lowerHandler as (val: unknown) => void)(value);
+					}
+					if (key === "value" || key === "modelValue") {
+						const generalChange = currentProps.onChange;
+						if (typeof generalChange === "function") {
+							(generalChange as (val: unknown) => void)(value);
+						}
+					}
+				},
+			},
 		);
 		bridgeRef.current = bridge;
 
