@@ -1,6 +1,6 @@
 import adapter from "@sveltejs/adapter-static";
 import { sveltekit } from "@sveltejs/kit/vite";
-import { defineGWA, type PluginOption } from "../../config/app.config.ts";
+import { arkano, defineGWA, type PluginOption } from "../app.config.ts";
 
 const globalEnv = globalThis as unknown as {
 	Deno?: { env: { get: (key: string) => string | undefined } };

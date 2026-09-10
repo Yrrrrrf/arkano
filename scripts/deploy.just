@@ -26,7 +26,7 @@ ci *flags:
 [script]
 build *flags:
     {{ CLI }} compat
-    ^deno run -A npm:tsdown --config ./tsdown.config.ts
+    ^deno run -A npm:tsdown --config ./config/tsdown.config.ts
 
 [doc('Preview build distribution')]
 [group('deploy')]

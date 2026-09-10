@@ -1,5 +1,5 @@
 import react from "@vitejs/plugin-react";
-import { arkano, defineGWA, type PluginOption } from "../../config/app.config.ts";
+import { arkano, defineGWA, type PluginOption } from "../app.config.ts";
 
 export default defineGWA({
 	plugins: [

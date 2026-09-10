@@ -1,5 +1,5 @@
 import vue from "@vitejs/plugin-vue";
-import { arkano, defineGWA, type PluginOption } from "../../config/app.config.ts";
+import { arkano, defineGWA, type PluginOption } from "../app.config.ts";
 
 export default defineGWA({
 	plugins: [
