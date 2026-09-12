@@ -2,15 +2,11 @@
 	"name": "@arkano/vite",
 	"version": "1.0.0",
 	"description": "Vite & Rolldown transform plugin for Arkano",
-	"license": "MIT",
 	"exports": {
 		".": "./src/index.ts",
 		"./client": "./client.d.ts"
 	},
 	"imports": {
-		"vite": "npm:vite@^8.0.0",
-		"@sveltejs/vite-plugin-svelte": "npm:@sveltejs/vite-plugin-svelte@^7.0.0",
-		"rolldown/filter": "npm:rolldown@^1.2.7/filter",
 		"@arkano/react": "workspace:@arkano/react",
 		"@arkano/vue": "workspace:@arkano/vue"
 	}

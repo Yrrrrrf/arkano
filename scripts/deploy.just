@@ -7,9 +7,9 @@
 ci *flags:
     just _banner "RUNNING ARKANO CI CONVERGENCE GATE"
     print "▶ [Phase 1/6] Biome Formatting Verification..."
-    just fmt-check
+    just fmt
     print "▶ [Phase 2/6] Biome Lint Verification..."
-    just lint-check
+    just lint
     print "▶ [Phase 3/6] Fallow Code Audit..."
     just audit
     print "▶ [Phase 4/6] Multi-Engine Type Matrix..."

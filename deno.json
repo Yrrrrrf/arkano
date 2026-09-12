@@ -17,9 +17,6 @@
 		"lib": ["deno.ns", "dom", "esnext"]
 	},
 	"workspace": ["./src/*", "./apps/*"],
-	"overrides": {
-		"typescript": "npm:typescript@~6.0.3"
-	},
 	"imports": {
 		"@std/fs": "jsr:@std/fs@^1.0.8",
 		"@std/fs/": "jsr:/@std/fs@^1.0.8/",
