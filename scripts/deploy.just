@@ -6,19 +6,8 @@
 [script]
 ci *flags:
     just _banner "RUNNING ARKANO CI CONVERGENCE GATE"
-    print "▶ [Phase 1/6] Biome Formatting Verification..."
-    just fmt
-    print "▶ [Phase 2/6] Biome Lint Verification..."
-    just lint
-    print "▶ [Phase 3/6] Fallow Code Audit..."
-    just audit
-    print "▶ [Phase 4/6] Multi-Engine Type Matrix..."
-    just types
-    print "▶ [Phase 5/6] Vitest Test Suite..."
+    just check
     just test
-    print "▶ [Phase 6/6] Packaging Distribution..."
-    just build
-    print "\n🎉 ALL CI GATES GREEN — CONVERGENCE PASSED."
 
 [doc('Package Arkano distribution via tsdown')]
 [group('deploy')]
@@ -66,3 +55,6 @@ publish *flags: build
 [doc('npm login')]
 [group('deploy')]
 login: (_with-brave "bunx npm login")
+
+
+cycle: prepare (ci "-vp") build

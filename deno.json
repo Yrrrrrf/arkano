@@ -54,7 +54,6 @@
 		"@vitest/coverage-v8": "npm:@vitest/coverage-v8@^4.0.0",
 		"svelte-check-native": "npm:svelte-check-native@^1.5.2",
 		"@typescript/native-preview": "npm:@typescript/native-preview@^7.0.0-dev",
-		"oxc-transform": "npm:oxc-transform@0.149.0",
-		"vue-tsc": "npm:vue-tsc@3.3.11"
+		"oxc-transform": "npm:oxc-transform@0.149.0"
 	}
 }
