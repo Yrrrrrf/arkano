@@ -1,4 +1,7 @@
-import { type MountedConduit, mountSvelteConduit } from "@arkano/core";
+import {
+	type MountedConduit,
+	mountSvelteConduit,
+} from "../../core/src/index.ts";
 import type { mount } from "svelte";
 import {
 	defineComponent,

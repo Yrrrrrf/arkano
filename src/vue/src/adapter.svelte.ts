@@ -1,4 +1,4 @@
-import { createPropValidator } from "@arkano/core";
+import { createPropValidator } from "../../core/src/index.ts";
 import type { mount } from "svelte";
 import { defineComponent, h } from "vue";
 import { Arkano } from "./host.svelte.ts";

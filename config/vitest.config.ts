@@ -7,8 +7,8 @@ const SRC_ROOT = new URL("../src", import.meta.url).pathname;
 const FIXTURES_ROOT = new URL("../fixtures", import.meta.url).pathname;
 
 const sharedAliases = [
-	{ find: /^@std\/path$/, replacement: "node:path" },
-	{ find: /^@std\/assert$/, replacement: "node:assert" },
+	{ find: /^arkano$/, replacement: `${SRC_ROOT}/core/src/index.ts` },
+	{ find: /^arkano\/(react|vue|vite)$/, replacement: `${SRC_ROOT}/$1/src/index.ts` },
 	{ find: /^@sdk\/ui$/, replacement: `${FIXTURES_ROOT}/components/mod.ts` },
 	{ find: /^@sdk\/ui\/(.*)/, replacement: `${FIXTURES_ROOT}/components/$1` },
 	{ find: /^@arkano\/([^/]+)$/, replacement: `${SRC_ROOT}/$1/src/index.ts` },
@@ -24,30 +24,100 @@ const jsrShimPlugin = {
 			id === "jsr:@std/fs/walk" ||
 			id === "@std/fs/ensure-dir" ||
 			id === "@std/fs/walk" ||
-			id === "@std/fs"
+			id === "@std/fs" ||
+			id === "jsr:@std/path" ||
+			id === "@std/path" ||
+			id === "@std/path/posix" ||
+			id === "jsr:@std/path/posix"
 		) {
 			return id;
 		}
 	},
 	load(id: string) {
+		if (
+			id === "jsr:@std/path" ||
+			id === "@std/path" ||
+			id === "@std/path/posix" ||
+			id === "jsr:@std/path/posix"
+		) {
+			return `
+        function normalize(path) {
+          const isAbs = path.startsWith('/');
+          const parts = path.split(/[\\\\/]+/).filter(Boolean);
+          const up = [];
+          for (const part of parts) {
+            if (part === '.') continue;
+            if (part === '..') {
+              if (up.length > 0 && up[up.length - 1] !== '..') {
+                up.pop();
+              } else if (!isAbs) {
+                up.push('..');
+              }
+            } else {
+              up.push(part);
+            }
+          }
+          return (isAbs ? '/' : '') + up.join('/');
+        }
+        export function join(...paths) {
+          return normalize(paths.filter(Boolean).join('/'));
+        }
+        export function basename(path, ext = '') {
+          const parts = path.split(/[\\\\/]+/).filter(Boolean);
+          const last = parts.length > 0 ? parts[parts.length - 1] : '';
+          if (ext && last.endsWith(ext)) {
+            return last.slice(0, -ext.length);
+          }
+          return last;
+        }
+        export function resolve(...paths) {
+          let resolvedPath = '';
+          let resolvedAbsolute = false;
+          for (let i = paths.length - 1; i >= -1 && !resolvedAbsolute; i--) {
+            const path = i >= 0 ? paths[i] : (typeof process !== 'undefined' && process.cwd ? process.cwd() : '/');
+            if (!path) continue;
+            resolvedPath = resolvedPath ? \`\${path}/\${resolvedPath}\` : path;
+            resolvedAbsolute = path.startsWith('/');
+          }
+          return normalize(resolvedPath) || '.';
+        }
+        export function relative(from, to) {
+          const fromAbs = resolve(from);
+          const toAbs = resolve(to);
+          if (fromAbs === toAbs) return '';
+          const fromParts = fromAbs.split('/').filter(Boolean);
+          const toParts = toAbs.split('/').filter(Boolean);
+          let samePartsLength = 0;
+          while (samePartsLength < fromParts.length && samePartsLength < toParts.length && fromParts[samePartsLength] === toParts[samePartsLength]) {
+            samePartsLength++;
+          }
+          const upCount = fromParts.length - samePartsLength;
+          const upParts = Array(upCount).fill('..');
+          const downParts = toParts.slice(samePartsLength);
+          return [...upParts, ...downParts].join('/') || '.';
+        }
+      `;
+		}
 		if (id === "jsr:@std/fs/ensure-dir" || id === "@std/fs/ensure-dir") {
 			return `
-        import { mkdir } from 'node:fs/promises';
         export async function ensureDir(dir) {
-          await mkdir(dir, { recursive: true });
+          if (typeof Deno !== 'undefined' && Deno.mkdir) {
+            await Deno.mkdir(dir, { recursive: true });
+          }
         }
       `;
 		}
 		if (id === "jsr:@std/fs/walk" || id === "@std/fs/walk") {
 			return `
-        import { readdir } from 'node:fs/promises';
-        import { join } from 'node:path';
         export async function* walk(dir, options = {}) {
-          const entries = await readdir(dir, { withFileTypes: true, recursive: true });
-          for (const entry of entries) {
-            const fullPath = join(entry.parentPath || dir, entry.name);
-            if (entry.isFile() && (!options.exts || options.exts.some(ext => entry.name.endsWith(ext)))) {
-              yield { path: fullPath, name: entry.name, isFile: true, isDirectory: false, isSymlink: false };
+          if (typeof Deno !== 'undefined' && Deno.readDir) {
+            for await (const entry of Deno.readDir(dir)) {
+              const fullPath = dir.endsWith('/') ? \`\${dir}\${entry.name}\` : \`\${dir}/\${entry.name}\`;
+              if (entry.isDirectory) {
+                yield* walk(fullPath, options);
+              } else if (entry.isFile && (!options.exts || options.exts.some(ext => entry.name.endsWith(ext)))) {
+                yield { path: fullPath, name: entry.name, isFile: true, isDirectory: false, isSymlink: false };
+              }
             }
           }
         }
@@ -55,21 +125,31 @@ const jsrShimPlugin = {
 		}
 		if (id === "@std/fs") {
 			return `
-        import { mkdir, readdir } from 'node:fs/promises';
-        import { existsSync as nodeExistsSync } from 'node:fs';
-        import { join } from 'node:path';
         export async function ensureDir(dir) {
-          await mkdir(dir, { recursive: true });
+          if (typeof Deno !== 'undefined' && Deno.mkdir) {
+            await Deno.mkdir(dir, { recursive: true });
+          }
         }
         export function existsSync(path) {
-          return nodeExistsSync(path);
+          if (typeof Deno !== 'undefined' && Deno.statSync) {
+            try {
+              Deno.statSync(path);
+              return true;
+            } catch {
+              return false;
+            }
+          }
+          return false;
         }
         export async function* walk(dir, options = {}) {
-          const entries = await readdir(dir, { withFileTypes: true, recursive: true });
-          for (const entry of entries) {
-            const fullPath = join(entry.parentPath || dir, entry.name);
-            if (entry.isFile() && (!options.exts || options.exts.some(ext => entry.name.endsWith(ext)))) {
-              yield { path: fullPath, name: entry.name, isFile: true, isDirectory: false, isSymlink: false };
+          if (typeof Deno !== 'undefined' && Deno.readDir) {
+            for await (const entry of Deno.readDir(dir)) {
+              const fullPath = dir.endsWith('/') ? \`\${dir}\${entry.name}\` : \`\${dir}/\${entry.name}\`;
+              if (entry.isDirectory) {
+                yield* walk(fullPath, options);
+              } else if (entry.isFile && (!options.exts || options.exts.some(ext => entry.name.endsWith(ext)))) {
+                yield { path: fullPath, name: entry.name, isFile: true, isDirectory: false, isSymlink: false };
+              }
             }
           }
         }

@@ -22,7 +22,7 @@ describe("@arkano/cli Emitter", () => {
 		});
 
 		const fileContent = await Deno.readTextFile(emittedPath);
-		expect(fileContent).toContain("import { arkano } from '@arkano/react'");
+		expect(fileContent).toContain("import { arkano } from 'arkano/react'");
 		expect(fileContent).toContain(
 			"export const Counter = arkano(SvelteCounter)",
 		);
@@ -40,7 +40,7 @@ describe("@arkano/cli Emitter", () => {
 		});
 
 		const fileContent = await Deno.readTextFile(emittedPath);
-		expect(fileContent).toContain("import { arkano } from '@arkano/vue'");
+		expect(fileContent).toContain("import { arkano } from 'arkano/vue'");
 		expect(fileContent).toContain(
 			"export const Counter = arkano(SvelteCounter)",
 		);

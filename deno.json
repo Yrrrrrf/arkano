@@ -18,8 +18,7 @@
 	},
 	"workspace": ["./src/*", "./apps/*"],
 	"overrides": {
-		"typescript": "npm:typescript@~6.0.3",
-		"vite": "npm:vite@^8.0.0"
+		"typescript": "npm:typescript@~6.0.3"
 	},
 	"imports": {
 		"@std/fs": "jsr:@std/fs@^1.0.8",
@@ -38,6 +37,13 @@
 		"@sdk/ui/*": "./fixtures/components/*",
 		"#fixtures/*": "./fixtures/*",
 		"@sveltejs/vite-plugin-svelte": "npm:@sveltejs/vite-plugin-svelte@^7.0.0",
+		"svelte": "npm:svelte@^5.0.0",
+		"svelte/compiler": "npm:svelte@^5.0.0/compiler",
+		"arktype": "npm:arktype@^2.0.0",
+		"react": "npm:react@^19.0.0",
+		"react-dom": "npm:react-dom@^19.0.0",
+		"vue": "npm:vue@^3.5.0",
+		"vite": "npm:vite@^8.0.0",
 		"rolldown/filter": "npm:rolldown@^1.2.7/filter",
 		"vite-plus": "npm:vite-plus@latest",
 		"tailwindcss": "npm:tailwindcss",
@@ -50,6 +56,8 @@
 		"jsdom": "npm:jsdom@latest",
 		"@vitest/coverage-v8": "npm:@vitest/coverage-v8@^4.0.0",
 		"svelte-check-native": "npm:svelte-check-native@^1.5.2",
-		"@typescript/native-preview": "npm:@typescript/native-preview@^7.0.0-dev"
+		"@typescript/native-preview": "npm:@typescript/native-preview@^7.0.0-dev",
+		"oxc-transform": "npm:oxc-transform@0.149.0",
+		"vue-tsc": "npm:vue-tsc@3.3.11"
 	}
 }

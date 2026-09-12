@@ -5,8 +5,10 @@
 		"config/**",
 		"scripts/**",
 		"**/*.test.*",
+		"**/tests/**",
 		"tsdown.config.ts",
-		"apps/**"
+		"apps/**",
+		"fix/**"
 	],
 	"ignoreDependencies": [
 		"@yuku-codegen/binding-linux-x64-gnu",
@@ -23,6 +25,7 @@
 		"vue",
 		"rolldown",
 		"rolldown/filter",
-		"workspace:@arkano"
+		"workspace:@arkano",
+		"oxc-transform"
 	]
 }

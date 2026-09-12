@@ -28,13 +28,13 @@ export function generateManifest(): Record<string, unknown> {
 	const peerDependenciesMeta: Record<string, { optional: boolean }> = {
 		react: { optional: true },
 		"react-dom": { optional: true },
-		svelte: { optional: true },
 		vite: { optional: true },
 		vue: { optional: true },
 	};
 
 	const dependencies: Record<string, string> = {
 		arktype: "^2.0.0",
+		"@sveltejs/vite-plugin-svelte": "^7.0.0",
 	};
 
 	const manifest = {
@@ -44,9 +44,9 @@ export function generateManifest(): Record<string, unknown> {
 			denoJson.description ??
 			"Universal Svelte 5 Runes Conduit for React 19 & Vue 3.5",
 		type: "module",
-		main: "./dist/core/index.js",
+		main: "./dist/core/index.cjs",
 		module: "./dist/core/index.mjs",
-		types: "./dist/core/index.d.ts",
+		types: "./dist/core/index.d.mts",
 		exports: {
 			".": {
 				import: {
@@ -54,8 +54,8 @@ export function generateManifest(): Record<string, unknown> {
 					default: "./dist/core/index.mjs",
 				},
 				require: {
-					types: "./dist/core/index.d.ts",
-					default: "./dist/core/index.js",
+					types: "./dist/core/index.d.cts",
+					default: "./dist/core/index.cjs",
 				},
 			},
 			"./react": {
@@ -64,8 +64,8 @@ export function generateManifest(): Record<string, unknown> {
 					default: "./dist/react/index.mjs",
 				},
 				require: {
-					types: "./dist/react/index.d.ts",
-					default: "./dist/react/index.js",
+					types: "./dist/react/index.d.cts",
+					default: "./dist/react/index.cjs",
 				},
 			},
 			"./vue": {
@@ -74,8 +74,8 @@ export function generateManifest(): Record<string, unknown> {
 					default: "./dist/vue/index.mjs",
 				},
 				require: {
-					types: "./dist/vue/index.d.ts",
-					default: "./dist/vue/index.js",
+					types: "./dist/vue/index.d.cts",
+					default: "./dist/vue/index.cjs",
 				},
 			},
 			"./vite": {
@@ -84,8 +84,8 @@ export function generateManifest(): Record<string, unknown> {
 					default: "./dist/vite/index.mjs",
 				},
 				require: {
-					types: "./dist/vite/index.d.ts",
-					default: "./dist/vite/index.js",
+					types: "./dist/vite/index.d.cts",
+					default: "./dist/vite/index.cjs",
 				},
 			},
 			"./vite/client": "./dist/vite/client.d.ts",
@@ -95,8 +95,8 @@ export function generateManifest(): Record<string, unknown> {
 					default: "./dist/cli/bin.mjs",
 				},
 				require: {
-					types: "./dist/cli/bin.d.ts",
-					default: "./dist/cli/bin.js",
+					types: "./dist/cli/bin.d.cts",
+					default: "./dist/cli/bin.cjs",
 				},
 			},
 			"./package.json": "./package.json",

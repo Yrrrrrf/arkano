@@ -231,6 +231,43 @@ export function ensureNodeCompat(): void {
 						}
 					}
 				}
+
+				// 4. Ensure import-without-cache does not register load hook in Deno (breaks .node binary addons)
+				for (const entry of Deno.readDirSync(denoNm)) {
+					if (entry.name.startsWith("import-without-cache@")) {
+						const hookFile = join(
+							denoNm,
+							entry.name,
+							"node_modules",
+							"import-without-cache",
+							"dist",
+							"index.mjs",
+						);
+						if (existsSync(hookFile)) {
+							const content = Deno.readTextFileSync(hookFile);
+							if (
+								content.includes(
+									"load(url, context, nextLoad) {\n\t\t\tcleanupImportAttributes(context);",
+								)
+							) {
+								const patched = content
+									.replace(
+										"load(url, context, nextLoad) {\n\t\t\tcleanupImportAttributes(context);",
+										"...(process.versions.deno ? {} : {\n\t\tload(url, context, nextLoad) {\n\t\t\tcleanupImportAttributes(context);",
+									)
+									.replace(
+										"return nextLoad(url, context);\n\t\t}\n\t});",
+										"return nextLoad(url, context);\n\t\t}\n\t\t})\n\t});",
+									);
+								try {
+									Deno.writeTextFileSync(hookFile, patched);
+								} catch {
+									// Ignore
+								}
+							}
+						}
+					}
+				}
 			} catch {
 				// Ignored
 			}

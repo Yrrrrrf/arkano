@@ -1,4 +1,7 @@
-import type { BaseAdapterOptions, SupportedHostTag } from "@arkano/core";
+import type {
+	BaseAdapterOptions,
+	SupportedHostTag,
+} from "../../core/src/index.ts";
 import type React from "react";
 import type { Component, ComponentProps } from "svelte";
 

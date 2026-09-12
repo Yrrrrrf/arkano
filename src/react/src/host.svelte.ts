@@ -1,4 +1,7 @@
-import { type MountedConduit, mountSvelteConduit } from "@arkano/core";
+import {
+	type MountedConduit,
+	mountSvelteConduit,
+} from "../../core/src/index.ts";
 import React, { useEffect, useImperativeHandle, useRef } from "react";
 import type { Component } from "svelte";
 import type { ArkanoHostProps } from "./types.ts";

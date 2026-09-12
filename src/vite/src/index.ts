@@ -22,6 +22,7 @@ export interface ArkanoCompositeOptions extends ArkanoPluginOptions {
 export function arkano(options: ArkanoCompositeOptions = {}): PluginOption[] {
 	return [
 		svelte({
+			configFile: false,
 			compilerOptions: { runes: true },
 			exclude: [/^\0/],
 			...options.svelte,

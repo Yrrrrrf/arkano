@@ -26,5 +26,5 @@
 			"#fixtures/*": ["../fixtures/*"]
 		}
 	},
-	"exclude": [".*", "dist/**", "build/**", "node_modules/**"]
+	"exclude": [".*", "dist/**", "build/**", "node_modules/**", "../fix/**", "fix/**", "tsdown.config.ts"]
 }

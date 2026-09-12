@@ -53,6 +53,11 @@ export function defineGWA(options: GwaConfig = {}) {
 		},
 		resolve: {
 			alias: [
+				{ find: /^arkano$/, replacement: `${SRC_ROOT}/core/src/index.ts` },
+				{
+					find: /^arkano\/(react|vue|vite)$/,
+					replacement: `${SRC_ROOT}/$1/src/index.ts`,
+				},
 				{
 					find: /^@sdk\/ui$/,
 					replacement: `${FIXTURES_ROOT}/components/mod.ts`,

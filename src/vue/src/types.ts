@@ -1,4 +1,7 @@
-import type { BaseAdapterOptions, SupportedHostTag } from "@arkano/core";
+import type {
+	BaseAdapterOptions,
+	SupportedHostTag,
+} from "../../core/src/index.ts";
 
 export type { SupportedHostTag };
 export type SupportedVueHostTag = SupportedHostTag;

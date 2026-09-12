@@ -1,6 +1,9 @@
+import { transform } from "oxc-transform";
+import { compileModule } from "svelte/compiler";
 import { defineConfig } from "tsdown";
 
 export default defineConfig({
+	cwd: new URL("..", import.meta.url).pathname,
 	entry: {
 		"core/index": "src/core/src/index.ts",
 		"react/index": "src/react/src/index.ts",
@@ -9,40 +12,38 @@ export default defineConfig({
 		"cli/bin": "src/cli/src/bin.ts",
 	},
 	format: ["esm", "cjs"],
-	dts: {
-		isolatedDeclarations: true,
-	},
+	fixedExtension: true,
+	tsconfig: "./config/tsconfig.json",
+	dts: true,
 	clean: true,
-	bundleless: false,
 	platform: "neutral",
-	copy: [
-		{
-			from: "src/vite/client.d.ts",
-			to: "dist/vite",
+	plugins: [{
+		name: "arkano-compile-runes",
+		transform: {
+			filter: { id: /\.svelte\.ts$/ },
+			async handler(source, id) {
+				const stripped = await transform(id, source, { sourcemap: true });
+				if (stripped.errors.length) throw new Error(stripped.errors.map(String).join("\n"));
+				return compileModule(stripped.code, {
+					filename: id,
+					generate: "client",
+					dev: false,
+				}).js;
+			},
 		},
-	],
+	}],
+	copy: [{ from: "src/vite/client.d.ts", to: "dist/vite" }],
 	deps: {
 		neverBundle: [
-			"svelte",
-			"react",
-			"react-dom",
-			"vue",
-			"vite",
+			/^svelte(?:\/|$)/,
+			/^react(?:\/|$)/,
+			/^react-dom(?:\/|$)/,
+			/^vue(?:\/|$)/,
+			/^vite(?:\/|$)/,
 			"@sveltejs/vite-plugin-svelte",
 			"arktype",
-			"@cliffy/command",
-			"@cliffy/table",
-			"@cliffy/ansi",
-			"@cliffy/ansi/colors",
-			"rolldown",
-			"rolldown/filter",
-			"@std/fs",
-			"@std/path",
-			"@std/streams",
-			"@std/assert",
-			"@arkano/core",
-			"@arkano/react",
-			"@arkano/vue",
+			/^@cliffy\//,
+			/^@std\//,
 		],
 	},
 });
