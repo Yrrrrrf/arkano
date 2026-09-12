@@ -12,8 +12,8 @@
 			"!**/build",
 			"!**/node_modules",
 			"!**/.svelte-kit",
-			"!**/.vite",
-			"!**/.justcache"
+			"!**/.svelte-check",
+			"!**/.vite"
 		]
 	},
 	"overrides": [

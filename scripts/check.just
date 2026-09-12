@@ -30,7 +30,12 @@ types:
     print "▶ [2/4] Checking Svelte 5 Runes (svelte-check)..."
     ^deno install --entrypoint npm:svelte-check-native npm:@typescript/native-preview npm:typescript@6
     {{ CLI }} compat
-    ^deno run -A npm:svelte-check-native --tsconfig ./config/tsconfig.json --threshold error
+    # todo: Link those to the main config dir! :D
+    cd src; ^deno run -A npm:svelte-check-native --tsconfig ../config/tsconfig.json --threshold error
+    cd ..
+    cd apps/svelte; ^deno run -A npm:svelte-check-native --tsconfig ../../config/tsconfig.json --threshold error
+    cd ..
+    cd ..
 
     print "▶ [3/4] Checking React 19 definitions (tsc)..."
     ^deno run -A npm:typescript@6/tsc -p ./config/tsconfig.json --noEmit

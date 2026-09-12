@@ -26,8 +26,6 @@ prune:
 [group('dev')]
 prepare: prune
     ^deno install
-    {{ CLI }} compat
-
 
 [doc('Run an app on the dev server (pass -A to run all apps concurrently)')]
 [group('dev')]

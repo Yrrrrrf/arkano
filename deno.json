@@ -9,7 +9,6 @@
 		"./react": "./src/react/src/index.ts",
 		"./vue": "./src/vue/src/index.ts",
 		"./vite": "./src/vite/src/index.ts",
-		"./vite/client": "./src/vite/client.d.ts",
 		"./cli": "./src/cli/src/bin.ts"
 	},
 	"nodeModulesDir": "auto",
