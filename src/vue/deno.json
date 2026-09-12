@@ -2,7 +2,6 @@
 	"name": "@arkano/vue",
 	"version": "1.0.0",
 	"description": "Vue 3.5 host, HOC, and directives for Arkano",
-	"license": "MIT",
 	"imports": {
 		"vue": "npm:vue@^3.5.0",
 		"@vue/test-utils": "npm:@vue/test-utils@latest",

@@ -8,24 +8,7 @@
 		"**/tests/**",
 		"tsdown.config.ts",
 		"apps/**",
-		"fix/**"
-	],
-	"ignoreDependencies": [
-		"@yuku-codegen/binding-linux-x64-gnu",
-		"@cliffy/command",
-		"@cliffy/table",
-		"@cliffy/ansi",
-		"@sveltejs/vite-plugin-svelte",
-		"tsdown",
-		"vite-plus",
-		"arktype",
-		"react",
-		"svelte",
-		"vite",
-		"vue",
-		"rolldown",
-		"rolldown/filter",
-		"workspace:@arkano",
-		"oxc-transform"
+		"fix/**",
+		"node_modules/**"
 	]
 }
