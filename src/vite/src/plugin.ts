@@ -1,5 +1,5 @@
-import { createFilter, normalizePath } from "vite";
-import type { DevEnvironment, HotUpdateOptions, Plugin } from "vite";
+import { createFilter, normalizePath } from "vite-plus";
+import type { DevEnvironment, HotUpdateOptions, Plugin } from "vite-plus";
 
 export interface ArkanoPluginOptions {
 	/** Host framework. Auto detects Vue and otherwise selects React. */
@@ -66,17 +66,20 @@ export function createArkanoCorePlugin(
 				if (
 					importer?.startsWith(BRIDGE_PREFIX) ||
 					importer?.split("?", 1)[0].endsWith(".svelte")
-				)
+				) {
 					return null;
+				}
 
 				const resolved = await this.resolve(filename, importer, {
 					skipSelf: true,
 				});
-				if (!resolved || resolved.external || resolved.id.startsWith("\0"))
+				if (!resolved || resolved.external || resolved.id.startsWith("\0")) {
 					return null;
+				}
 				const cleanPath = normalizePath(resolved.id);
-				if (!cleanPath.endsWith(".svelte") || !shouldBridge(cleanPath))
+				if (!cleanPath.endsWith(".svelte") || !shouldBridge(cleanPath)) {
 					return null;
+				}
 				const target = query.get("target") ?? targetFramework;
 				return `${BRIDGE_PREFIX}${target}:${cleanPath}`;
 			},

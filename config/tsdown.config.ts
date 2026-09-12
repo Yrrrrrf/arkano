@@ -34,16 +34,6 @@ export default defineConfig({
 	}],
 	copy: [{ from: "src/vite/client.d.ts", to: "dist/vite" }],
 	deps: {
-		neverBundle: [
-			/^svelte(?:\/|$)/,
-			/^react(?:\/|$)/,
-			/^react-dom(?:\/|$)/,
-			/^vue(?:\/|$)/,
-			/^vite(?:\/|$)/,
-			"@sveltejs/vite-plugin-svelte",
-			"arktype",
-			/^@cliffy\//,
-			/^@std\//,
-		],
+		neverBundle: true,
 	},
 });

@@ -1,6 +1,6 @@
 import tailwindcss from "@tailwindcss/vite";
-import { build } from "vite";
-import { describe, expect, it } from "vitest";
+import { build } from "vite-plus";
+import { describe, expect, it } from "vite-plus/test";
 import { arkano } from "../src/index.ts";
 
 const root = new URL("./fixtures/", import.meta.url).pathname;
@@ -29,8 +29,9 @@ describe("styled components in production", () => {
 			});
 			const outputs = (Array.isArray(result) ? result : [result]).flatMap(
 				(bundle) => {
-					if (!("output" in bundle))
+					if (!("output" in bundle)) {
 						throw new Error("Expected build output, not a watcher");
+					}
 					return bundle.output;
 				},
 			);

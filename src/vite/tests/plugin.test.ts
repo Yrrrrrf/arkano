@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 import { createArkanoCorePlugin } from "../src/plugin.ts";
 
 function hooks(options: Parameters<typeof createArkanoCorePlugin>[0] = {}) {

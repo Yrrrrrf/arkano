@@ -30,7 +30,6 @@
 		"@sveltejs/vite-plugin-svelte": "npm:@sveltejs/vite-plugin-svelte@^7.0.0",
 		"svelte": "npm:svelte@^5.0.0",
 		"svelte/compiler": "npm:svelte@^5.0.0/compiler",
-		"vite": "npm:vite@^8.0.0",
 		"vite-plus": "npm:vite-plus@latest",
 		"tailwindcss": "npm:tailwindcss",
 		"@tailwindcss/vite": "npm:@tailwindcss/vite",

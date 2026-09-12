@@ -2,7 +2,7 @@ import {
 	type Options as SvelteOptions,
 	svelte,
 } from "@sveltejs/vite-plugin-svelte";
-import type { PluginOption } from "vite";
+import type { PluginOption } from "vite-plus";
 import { type ArkanoPluginOptions, createArkanoCorePlugin } from "./plugin.ts";
 
 export interface ArkanoCompositeOptions extends ArkanoPluginOptions {
