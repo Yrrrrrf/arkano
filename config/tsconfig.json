@@ -9,7 +9,6 @@
     "skipLibCheck": true,
     "strict": true,
     "checkJs": false,
-    "allowJs": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
@@ -31,7 +30,6 @@
     "build/**",
     "node_modules/**",
     "../fix/**",
-    "fix/**",
     "tsdown.config.ts"
   ]
 }
